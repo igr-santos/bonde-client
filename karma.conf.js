@@ -11,19 +11,21 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
     './app/scripts/tests/globals.js',
-      'webpack.test.config.js'
+      'webpack.test.config.es5.js',
+      'node_modules/babel-polyfill/dist/polyfill.js'
     ],
 
     webpack: {
       devtool: 'inline-source-map',
 
       resolve: {
+        moduleDirectories: [ 'node_modules' ],
         extensions: [ '', '.js', '.jsx' ]
       },
 
       module: {
         loaders: [
-          { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader?optional=runtime' }
+          { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader' }
         ]
       },
 
@@ -50,8 +52,21 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'webpack.test.config.js': [ 'webpack', 'sourcemap' ]
+      'webpack.test.config.js': [ 'babel' ]
     },
+
+		babelPreprocessor: {
+			options: {
+				presets: ['es2015'],
+				sourceMap: 'inline'
+			},
+			filename: function (file) {
+        return file.originalPath.replace(/\.js$/, '.es5.js');
+			},
+			sourceFileName: function (file) {
+				return file.originalPath;
+			}
+		},
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -73,7 +88,13 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
+
+    phantomjsLauncher: {
+      // Have phantomjs exit if a ResourceError is encountered
+      // (useful if karma exits without killing phantom)
+      exitOnResourceError: true
+    },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits

@@ -1,4 +1,4 @@
-var context = require.context('./app/scripts/tests', true, /Test\.(js|jsx)$/);
+var context = require.context('./app/scripts/tests', true, /Test\.(js|jsx|es5.js)$/);
 
 beforeEach(() => {
   sandbox = sinon.sandbox.create()
