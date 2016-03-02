@@ -1,7 +1,5 @@
-import React from 'react/addons'
+import TestUtils from 'react-addons-test-utils'
 import { DropDownMenu } from './../../components'
-
-const { TestUtils } = React.addons
 
 let component
 let props = { text: 'Foo bar' }

@@ -1,7 +1,5 @@
-import React from 'react/addons'
+import TestUtils from 'react-addons-test-utils'
 import { Progress } from './../../components'
-
-const { TestUtils } = React.addons
 
 describe('Progress', () => {
   describe('#render', () => {

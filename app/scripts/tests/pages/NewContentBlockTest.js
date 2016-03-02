@@ -1,12 +1,10 @@
-import React from 'react/addons'
+import TestUtils from 'react-addons-test-utils'
 import ReactS3Uploader from 'react-s3-uploader'
 import * as BlockActions from './../../actions/BlockActions'
 import { BlockMiniature, ColorPicker, Progress } from './../../components'
 import NewBlock from './../../pages/NewBlock.jsx'
 import classnames from 'classnames'
 import { BLOCK_LAYOUTS } from './../../constants/BlockLayouts'
-
-const { TestUtils } = React.addons
 
 let container, component, mobilization, dispatch
 

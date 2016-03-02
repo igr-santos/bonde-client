@@ -2,6 +2,7 @@ import React from 'react'
 import TransitionGroup from 'react-addons-transition-group'
 import classnames from 'classnames'
 import { FormWidgetInputForm } from './'
+const ReactTransitionGroup = TransitionGroup
 
 export default class FormWidgetInput extends React.Component {
   constructor(props, context) {

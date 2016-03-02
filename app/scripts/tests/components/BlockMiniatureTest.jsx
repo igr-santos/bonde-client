@@ -1,8 +1,7 @@
-import React from 'react/addons'
+import TestUtils from 'react-addons-test-utils'
 import { BlockMiniature } from './../../components'
 import { BLOCK_LAYOUTS } from './../../constants/BlockLayouts'
 
-const { TestUtils } = React.addons
 let layout, component
 
 describe('BlockMiniature', () => {

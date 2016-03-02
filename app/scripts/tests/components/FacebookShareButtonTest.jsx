@@ -1,7 +1,5 @@
-import React from 'react/addons'
+import TestUtils from 'react-addons-test-utils'
 import { FacebookShareButton } from './../../components'
-
-const { TestUtils } = React.addons
 
 describe('FacebookShareButton', () => {
   it('should open a popup on click', () => {

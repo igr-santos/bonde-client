@@ -1,12 +1,10 @@
-import React from 'react/addons'
+import TestUtils from 'react-addons-test-utils'
 import classnames from 'classnames'
 import { Block, Navbar } from './../../components'
 import * as EditMobilizationImport from './../../pages/EditMobilization.jsx'
 import stubRouterContext from './../stubRouterContext'
 
 const EditMobilization = EditMobilizationImport.WrappedComponent
-const { TestUtils } = React.addons
-
 const block1 = { position: 0, id: 1 }
 const block2 = { position: 1, id: 2 }
 const blocks = { data: [block1, block2], loaded: true }

@@ -1,7 +1,5 @@
-import React from 'react/addons'
+import TestUtils from 'react-addons-test-utils'
 import { DropDownMenuItem } from './../../components'
-
-const { TestUtils } = React.addons
 
 let component, clickString
 

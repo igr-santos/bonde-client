@@ -1,8 +1,7 @@
-import React from 'react/addons'
+import TestUtils from 'react-addons-test-utils'
 import MobilizationSettings from './../../containers/MobilizationSettings'
 import ConfigurationsMenu from './../../components/ConfigurationsMenu'
 
-const { TestUtils } = React.addons
 import stubRouterContext from './../stubRouterContext'
 const mobilization = {}
 const location = {}

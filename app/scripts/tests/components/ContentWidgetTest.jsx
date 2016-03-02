@@ -1,8 +1,7 @@
-import React from 'react/addons'
+import TestUtils from 'react-addons-test-utils'
 import ContentWidget from './../../components/ContentWidget.jsx'
 import classnames from 'classnames'
 
-const { TestUtils } = React.addons
 const mobilization = { header_font: 'ubuntu', body_font: 'open-sans' }
 const widget = {settings: {content: 'Clique aqui para editar...'}}
 let component

@@ -1,8 +1,6 @@
-import React from 'react/addons'
+import TestUtils from 'react-addons-test-utils'
 import * as BlockActions from './../../actions/BlockActions'
 import { Block, Widget, ColorPicker, DropDownMenu, DropDownMenuItem } from './../../components'
-
-const { TestUtils } = React.addons
 
 let widget1
 let widget2
