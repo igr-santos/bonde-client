@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-require('../compiler'); // enables ES6 support
 var path = require('path');
 var rootDir = path.resolve(__dirname, '..');
 /**
