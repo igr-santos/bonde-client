@@ -40,17 +40,17 @@ box-sizing: border-box;
 	text-decoration:none;
 	border-left:3px solid #20BDE9;
 }
-.button.is-active{
+.button..col.is-active{
 background-color:#CAEFF2;
 }
 
 // DÁ EFEITO EM BOTÕES COM IMAGEM
 
-a img{
+.widget a img{
 transition: .1s ease-in-out;
 
 }
-a img:hover{
+.widget a img:hover{
 transform: scale(1.01);
 box-shadow: 0px 0px 15px rgba(0,0,0,.4)
 }
