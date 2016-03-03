@@ -30,9 +30,13 @@ font-weight:lighter;
 display:block;
 padding:0px;
 padding:.5em 2em;
-border-left: 3px solid rgba(0,0,0,0) 
+border-left: 3px solid rgba(0,0,0,0);
+box-sizing: border-box;
 }
 .button-menu:hover{
 	text-decoration:none;
 	border-left:3px solid #20BDE9;
+}
+.button.is-active{
+background-color:#CAEFF2;
 }
