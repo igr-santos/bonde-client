@@ -17,7 +17,7 @@ export default class MobilizationMenu extends React.Component {
   render() {
     const { mobilization } = this.props
     return (
-      <div className='white bg-gray' style={{maxWidth: '250px', minWidth: '250px'}}>
+      <div className='white bg-gray' style={{maxWidth: '280px', minWidth: '280px'}}>
         <div className="flex flex-center p3">
           <div className="flex-auto">
             <Link
