@@ -95,7 +95,6 @@
     "style-loader": "0.13.0",
     "superagent": "^1.2.0",
     "tls": "0.0.1",
-    "universal-analytics": "^0.3.9",
     "url-loader": "^0.5.6",
     "webpack-isomorphic-tools": "2.2.30"
   },
