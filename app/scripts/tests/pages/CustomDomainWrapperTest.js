@@ -1,6 +1,6 @@
 import TestUtils from 'react-addons-test-utils'
-import { CustomDomainWrapper } from '../../pages/CustomDomainWrapper/CustomDomainWrapper'
-import ShowMobilization from '../../pages/ShowMobilization'
+import { CustomDomainWrapper } from '../../pages/CustomDomainWrapper/CustomDomainWrapper.jsx'
+import ShowMobilization from '../../pages/ShowMobilization.jsx'
 
 describe('CustomDomainWrapper', () => {
   it('should not render ShowMobilization when there is no mobilization', () => {

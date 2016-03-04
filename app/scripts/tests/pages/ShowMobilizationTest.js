@@ -1,6 +1,6 @@
 import TestUtils from 'react-addons-test-utils'
 import DocumentMeta from 'react-document-meta'
-import ShowMobilization from './../../pages/ShowMobilization'
+import ShowMobilization from './../../pages/ShowMobilization.jsx'
 import { Navbar, Block } from './../../components'
 
 let component

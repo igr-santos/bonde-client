@@ -11,21 +11,28 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
     './app/scripts/tests/globals.js',
-      'webpack.test.config.es5.js',
-      'node_modules/babel-polyfill/dist/polyfill.js'
+      'webpack.test.config.js'
     ],
 
     webpack: {
       devtool: 'inline-source-map',
 
       resolve: {
-        moduleDirectories: [ 'node_modules' ],
-        extensions: [ '', '.js', '.jsx' ]
+        moduleDirectories: [ 'node_modules' ]
       },
 
       module: {
         loaders: [
-          { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader' }
+          {
+            test: /\.(js|jsx)$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            query: { cacheDirectory: true }
+          },
+          {
+            test: /\.jpe?g$|\.gif$|\.png$/i,
+            loader: 'url-loader?limit=10240'
+          }
         ]
       },
 
@@ -52,21 +59,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'webpack.test.config.js': [ 'babel' ]
+      'webpack.test.config.js': [ 'babel', 'webpack', 'sourcemap' ]
     },
-
-		babelPreprocessor: {
-			options: {
-				presets: ['es2015'],
-				sourceMap: 'inline'
-			},
-			filename: function (file) {
-        return file.originalPath.replace(/\.js$/, '.es5.js');
-			},
-			sourceFileName: function (file) {
-				return file.originalPath;
-			}
-		},
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -84,11 +78,12 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: false,
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['PhantomJS'],
+
 
     phantomjsLauncher: {
       // Have phantomjs exit if a ResourceError is encountered
@@ -98,6 +93,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: true
   })
 }
