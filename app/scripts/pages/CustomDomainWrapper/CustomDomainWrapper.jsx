@@ -4,7 +4,6 @@ import { fetchMobilizations, isMobilizationsLoaded } from './../../reducers/mobi
 import { findBlocks, isBlocksLoaded } from './../../reducers/blocks'
 import { findWidgets, isWidgetsLoaded } from './../../reducers/widgets'
 import { ShowMobilization } from './../'
-import ga from 'react-ga'
 
 const mapStateToProps = (state) => {
   return ({
@@ -53,11 +52,6 @@ export class CustomDomainWrapper extends React.Component {
     }
 
     return Promise.all(promises)
-  }
-
-  componentDidMount() {
-    ga.initialize('UA-26278513-30', { debug: true })
-    ga.pageview(document.location.pathname)
   }
 
   renderMobilization() {
