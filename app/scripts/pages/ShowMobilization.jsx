@@ -15,7 +15,7 @@ export default class ShowMobilization extends React.Component {
     let mob = this.props.mobilization
 
     ga.initialize('UA-26278513-30')
-    ga.pageview('/' + mob.id)
+    ga.pageview('/' + mob.slug)
 
     if (mob.google_analytics_code) {
       ga.initialize(mob.google_analytics_code)
