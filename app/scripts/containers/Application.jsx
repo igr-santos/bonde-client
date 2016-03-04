@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import {isLoaded as isAuthLoaded, load as loadAuth} from './../reducers/auth'
-import trackPageView from './../../../src/trackPageView'
+import ga from 'react-ga'
 
 import '../../styles/main.scss'
 import '../../../node_modules/font-awesome/scss/font-awesome.scss'
@@ -25,9 +25,13 @@ export default class Application extends React.Component {
     return Promise.all(promises)
   }
 
+  componentDidMount() {
+    ga.initialize('UA-26278513-30', { debug: true })
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
-      trackPageView(this.props.location.pathname)
+      ga.pageview(this.props.location.pathname)
     }
   }
 
