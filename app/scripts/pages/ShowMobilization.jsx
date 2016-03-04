@@ -14,11 +14,11 @@ export default class ShowMobilization extends React.Component {
   componentDidMount() {
     let mob = this.props.mobilization
 
-    ga.initialize('UA-26278513-30', { debug: true })
+    ga.initialize('UA-26278513-30')
     ga.pageview('/' + mob.id)
 
     if (mob.google_analytics_code) {
-      ga.initialize(mob.google_analytics_code, { debug: true })
+      ga.initialize(mob.google_analytics_code)
       ga.pageview('/')
     }
   }

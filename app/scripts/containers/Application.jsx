@@ -26,7 +26,7 @@ export default class Application extends React.Component {
   }
 
   componentDidMount() {
-    ga.initialize('UA-26278513-30', { debug: true })
+    ga.initialize('UA-26278513-30')
   }
 
   componentDidUpdate(prevProps) {
