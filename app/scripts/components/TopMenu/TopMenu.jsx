@@ -44,10 +44,10 @@ export default class TopMenu extends React.Component {
 
   render() {
     return (
-      <div className="topMenu clearfix flex flex-center px4 bg-topMenu">
+      <div className="topMenu clearfix flex flex-none px4 bg-topMenu">
         <Link
           to="/"
-          className="reboo-logo mt2">
+          className="reboo-logo mt1">
         </Link>
         <i className="fa fa-ellipsis-v py2 lightGray"></i>
         { this.renderUserMenu() }

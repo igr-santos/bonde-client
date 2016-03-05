@@ -49,17 +49,8 @@ export default class UserDashboard extends React.Component {
 
     // TODO http://glenmaddern.com/articles/css-modules
     // we should be using css modules to better define styles
-    const absoluteStyle = {
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      left: 0,
-      display: 'flex',
-      flexDirection: 'column'
-    }
-
     return (
-      <div style={absoluteStyle}>
+      <div className="top-0 right-0 bottom-0 left-0 flex flex-column absolute">
         <TopMenu auth={this.props.auth} />
         {
           /* TODO pass mobilizations as props, and change the following

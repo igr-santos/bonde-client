@@ -16,7 +16,7 @@ export default class WYSIHTMLToolbarColorPicker extends React.Component {
         style={{
           display: "none",
           top: "36px",
-          right: "57px"
+          right: "105px"
         }}
         className="white p2 absolute">
         <input

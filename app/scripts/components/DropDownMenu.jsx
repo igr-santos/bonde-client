@@ -56,7 +56,7 @@ export default class DropDownMenuItem extends React.Component {
     const { wrapperClassName, buttonClassName, menuClassName, text, children } = this.props
 
     return (
-      <div className={classnames('relative', wrapperClassName)}>
+      <div style={{marginTop: '5px'}} className={classnames('relative', wrapperClassName)}>
         <button className={buttonClassName} onClick={::this.handleClick}>
           {this.renderIcon()} {text}
         </button>
