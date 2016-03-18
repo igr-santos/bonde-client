@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import ReactDOMServer from 'react-dom/server'
 import serialize from 'serialize-javascript'
 import DocumentMeta from 'react-document-meta'
 
@@ -20,7 +21,7 @@ export default class Html extends Component {
 
   render() {
     const {assets, component, store} = this.props
-    const content = React.renderToString(component)
+    const content = ReactDOMServer.renderToString(component)
 
     return (
       <html lang="en-us">

@@ -1,4 +1,5 @@
 import Express from 'express';
+import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 import Location from 'react-router/lib/Location';
 import config from './config';
@@ -53,7 +54,7 @@ app.use((req, res) => {
   const location = new Location(req.path, req.query);
   if (__DISABLE_SSR__) {
     res.send('<!doctype html>\n' +
-      React.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={<div/>} store={store}/>));
+      ReactDOMServer.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={<div/>} store={store}/>));
   } else {
     universalRouter(location, undefined, store, req.headers.host)
       .then(({component, transition, isRedirect}) => {
@@ -62,7 +63,7 @@ app.use((req, res) => {
           return;
         }
         res.send('<!doctype html>\n' +
-          React.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+          ReactDOMServer.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
       })
       .catch((error) => {
         if (error.redirect) {
