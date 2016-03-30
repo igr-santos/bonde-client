@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- 4.1
+- 5.1
 env:
   - CXX=g++-4.8
 addons:
@@ -12,6 +12,7 @@ addons:
 before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
+- if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
 notifications:
   slack:
     secure: n/pvjxZljeSgCBE11JIZksotHqY/nCBSUFqirDqVaspERdMHKKGfbYxJTlpA7V8AO4VJp4V2Euh5Ci/bmSQDwUXOQBdvoQdqU4er9nLMs5T1cYXgFAEZV8X8TIt72SOCBh8cOu9xVOVJMig2gM56d6mV9naSBdtIacznTFK3HR26QUWIWXUgJDS1aIS6Znuri+aWNdO3NKavMFOtvNtX7iSPSQUjV064P38n/mnjM5SWJh46kogp1IaHcL0M7Po4cj1iboF2ICQrFLAjWvGVGHsuCr2B4RYohejYMYP0a+4X6nxx/OVKTNqwgx45+QNJmBuUX48SWRbcinaozZ3s0NB155k6rVBKP+PW5POqTkBThJ+XSXhBJgEn1hjDjh8lnBZz6v2ru0M6uqERrAH0u75W1ZMLBD9ZKXJF5pTqvrGE86UJVN+kLbCYJ1Q18NMmaCd5i+Gvd6P129nf15Ir2L5ceGpgPppAsmswU23RO2DFMxYJMc+eEiYfrjFUE0USyOTJbBA+gFL23K5J0SpefQs6w+yXqjkeJBP44SXbM6H5etqV/WAlnonXjAVy99To/69nzLNfVLtZNOS3FQQqgB2i7esqTOcHrEgBo9QH7QxM/MmpZld8AZ0M7C2TXk8EfsVfmEyxrqnFrdNIBOaOjv2gNYrcLeUwPhW4ROYM5sI=
