@@ -15,11 +15,15 @@ npm run dev
 And you are done!
 
 ## Tests
-As simples as:
+As simple as:
 ```
 npm run test
 ```
 Now sit and relax.
+
+## Troubleshooting
+In case you have a failing test and the output doesn't say much, try changing
+Karma's log_level to debug.
 
 ## Deploy
 We have now two environments, staging and production, hosted by Heroku. All you have to do is to push changes to the master branch of these Heroku repositories, and it will be automatically deployed.

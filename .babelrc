@@ -1,4 +1,9 @@
 {
-  "presets": ["react", "stage-0"],
-  "plugins": ["typecheck", "syntax-flow", "transform-flow-strip-types"]
+  "presets": ["react", "es2015", "stage-0"],
+  "plugins": [
+    "typecheck",
+    "syntax-flow",
+    "transform-decorators-legacy",
+    "transform-flow-strip-types"
+  ]
 }

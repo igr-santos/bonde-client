@@ -1,5 +1,5 @@
 import TestUtils from 'react-addons-test-utils'
-import { CustomDomainWrapper } from '../../pages/CustomDomainWrapper/CustomDomainWrapper.js'
+import { CustomDomainWrapper } from '../../pages/CustomDomainWrapper/CustomDomainWrapper.jsx'
 import ShowMobilization from '../../pages/ShowMobilization.jsx'
 
 describe('CustomDomainWrapper', () => {
