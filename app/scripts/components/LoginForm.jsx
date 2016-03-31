@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import classnames from 'classnames'
@@ -25,10 +25,13 @@ function loginValidation(data) {
 }
 
 @connect(state => ({ auth: state.auth, form: state.loginForm }))
-@reduxForm('loginForm', loginValidation)
+@reduxForm({
+  form: 'loginForm',
+  validate: loginValidation
+})
 @reactMixin.decorate(Navigation)
 
-export default class LoginForm extends React.Component {
+export default class LoginForm extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,

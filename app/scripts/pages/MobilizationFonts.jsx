@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 import classnames from 'classnames'
 import * as Paths from '../Paths'
 import * as MobilizationActions from './../actions/MobilizationActions'
@@ -22,7 +22,7 @@ function mobilizationFontsValidation(data) {
 @connect(state => ({ form: state.mobilizationFonts }))
 @reduxForm('mobilizationFonts', mobilizationFontsValidation)
 
-export default class MobilizationFonts extends React.Component {
+export default class MobilizationFonts extends Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,

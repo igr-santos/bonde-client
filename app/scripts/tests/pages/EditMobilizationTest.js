@@ -1,3 +1,4 @@
+import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 import classnames from 'classnames'
 import { Block, Navbar } from './../../components'

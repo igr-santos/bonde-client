@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 import * as Paths from '../Paths'
 import { Label, SaveButton, CloseButton } from './../components'
 import { editMobilization } from './../reducers/mobilizations'
@@ -18,7 +18,7 @@ const validateCustomDomain = (data) => {
 @connect(state => ({ form: state.mobilizationCustomDomain }))
 @reduxForm('mobilizationCustomDomain', validateCustomDomain)
 
-export default class MobilizationCustomDomain extends React.Component {
+export default class MobilizationCustomDomain extends Component {
   static propTypes = {
     handleBlur: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,

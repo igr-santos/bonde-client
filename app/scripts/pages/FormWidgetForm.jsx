@@ -1,11 +1,11 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as WidgetActions from './../actions/WidgetActions'
 import * as Paths from '../Paths'
 import { FormWidgetMenu, Loading, CloseButton, Label } from './../components'
-import reduxForm from 'redux-form'
+import {reduxForm} from 'redux-form'
 
 function widgetFormValidation() {
   const errors = { valid: true }
@@ -14,7 +14,7 @@ function widgetFormValidation() {
 
 @connect(state => ({ form: state.widgetForm }))
 @reduxForm('widgetForm', widgetFormValidation)
-export default class FormWidgetForm extends React.Component {
+export default class FormWidgetForm extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,

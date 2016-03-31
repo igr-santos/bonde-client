@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react'
-import reduxForm from 'redux-form'
+import React, {Component, PropTypes} from 'react'
+import {reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 import ReactS3Uploader from 'react-s3-uploader'
 import {CloseButton, Label, InputCounter, SaveButton} from './../components'
@@ -9,7 +9,7 @@ import * as Paths from '../Paths'
 @connect(state => ({ form: state.mobilizationSharing }))
 @reduxForm('mobilizationSharing')
 
-export default class MobilizationSharing extends React.Component {
+export default class MobilizationSharing extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,

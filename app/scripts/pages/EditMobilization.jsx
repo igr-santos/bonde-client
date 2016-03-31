@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import { Block, Loading, Navbar } from './../components'
 import reactMixin from 'react-mixin'
@@ -12,9 +12,10 @@ import { fetchWidgets } from './../reducers/widgets'
   widgetsCount: state.widgets.length,
   mobilizationEditor: state.mobilizationEditor
 }))
+
 @reactMixin.decorate(Navigation)
 
-export default class EditMobilization extends React.Component {
+export default class EditMobilization extends Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,

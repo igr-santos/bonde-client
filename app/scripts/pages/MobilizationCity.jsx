@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import * as MobilizationActions from './../actions/MobilizationActions'
 import * as Paths from '../Paths'
 import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import { CloseButton } from './../components'
@@ -21,7 +21,7 @@ function mobilizationCityValidation(data) {
 @reduxForm('mobilizationCity', mobilizationCityValidation)
 @reactMixin.decorate(Navigation)
 
-export default class MobilizationCity extends React.Component {
+export default class MobilizationCity extends Component {
 
   constructor(props, context) {
     super(props, context)

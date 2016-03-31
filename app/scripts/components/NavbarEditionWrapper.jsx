@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import { NavbarButton, NavbarForm } from './'
 import { editBlock } from './../reducers/blocks'
 
-export default class NavbarEditionWrapper extends React.Component {
+export default class NavbarEditionWrapper extends Component {
   static propTypes = {
     block: PropTypes.object.isRequired,
     mobilization: PropTypes.object.isRequired,
