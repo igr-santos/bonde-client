@@ -1,44 +1,69 @@
 /**
  * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
  */
-import 'babel/polyfill';
+//import queryString from 'query-string';
+//import universalRouter from './universalRouter';
+
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import BrowserHistory from 'react-router/lib/BrowserHistory';
-import Location from 'react-router/lib/Location';
-import queryString from 'query-string';
 import createStore from './redux/create';
-import ApiClient from './ApiClient';
-import universalRouter from './universalRouter';
-const history = new BrowserHistory();
-const client = new ApiClient();
+import ApiClient from './helpers/ApiClient';
+import io from 'socket.io-client';
+import {Provider} from 'react-redux';
+import { Router, browserHistory } from 'react-router';
+import { ReduxAsyncConnect } from 'redux-async-connect';
+import useScroll from 'scroll-behavior/lib/useStandardScroll';
+import getRoutes from './routes';
 
+const client = new ApiClient();
+const history = useScroll(() => browserHistory)();
 const dest = document.getElementById('content');
-const store = createStore(client, window.__data);
-const search = document.location.search;
-const query = search && queryString.parse(search);
-const location = new Location(document.location.pathname, query);
+const store = createStore(history, client, window.__data);
+
+//const search = document.location.search;
 const host = document.location.host
 
-universalRouter(location, history, store, host)
-  .then(({component}) => {
-    if (__DEVTOOLS__) {
-      const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
-      console.info('You will see a "Warning: React attempted to reuse markup in a container but the checksum was' +
-        ' invalid." message. That\'s because the redux-devtools are enabled.');
-      ReactDOM.render(<div>
-        {component}
-        <DebugPanel top right bottom key="debugPanel">
-          <DevTools store={store} monitor={LogMonitor}/>
-        </DebugPanel>
-      </div>, dest);
-    } else {
-      ReactDOM.render(component, dest);
-    }
-  }, (error) => {
-    console.error(error);
+function initSocket() {
+  const socket = io('', { path: '/' });
+  socket.on('news', (data) => {
+    console.log(data);
+    socket.emit('Other event');
   });
+  socket.on('msg', (data) => {
+    console.log(data);
+  });
+}
 
+global.socket = initSocket();
+
+const component = (
+	<Router render={(props) =>
+		<ReduxAsyncConnect {...props} helpers={{client}} filter={item => !item.deferred} />
+	} history={history}>
+		{getRoutes(store)}
+	</Router>
+);
+
+ReactDOM.render(
+  <Provider store={store} key="provider">
+    {component}
+  </Provider>,
+  dest
+);
+
+if (__DEVTOOLS__ && !window.devToolsExtension) {
+  const DevTools = require('../app/scripts/containers/DevTools/DevTools');
+  ReactDOM.render(
+    <Provider store={store} key="provider">
+      <div>
+        {component}
+        <DevTools />
+      </div>
+    </Provider>,
+    dest
+  );
+}
 
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger

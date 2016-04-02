@@ -749,6 +749,11 @@
       "from": "babel-preset-stage-3@>=6.3.13 <7.0.0",
       "resolved": "https://registry.npmjs.org/babel-preset-stage-3/-/babel-preset-stage-3-6.5.0.tgz"
     },
+    "babel-regenerator-runtime": {
+      "version": "6.5.0",
+      "from": "babel-regenerator-runtime@>=6.3.13 <7.0.0",
+      "resolved": "https://registry.npmjs.org/babel-regenerator-runtime/-/babel-regenerator-runtime-6.5.0.tgz"
+    },
     "babel-register": {
       "version": "6.7.2",
       "from": "babel-register@>=6.5.2 <7.0.0",
@@ -1796,6 +1801,11 @@
           "resolved": "https://registry.npmjs.org/utila/-/utila-0.3.3.tgz"
         }
       }
+    },
+    "dom-helpers": {
+      "version": "2.4.0",
+      "from": "dom-helpers@>=2.4.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/dom-helpers/-/dom-helpers-2.4.0.tgz"
     },
     "dom-serialize": {
       "version": "2.2.1",
@@ -4681,6 +4691,11 @@
       "from": "redux@3.3.1",
       "resolved": "https://registry.npmjs.org/redux/-/redux-3.3.1.tgz"
     },
+    "redux-async-connect": {
+      "version": "1.0.0-rc4",
+      "from": "redux-async-connect@latest",
+      "resolved": "https://registry.npmjs.org/redux-async-connect/-/redux-async-connect-1.0.0-rc4.tgz"
+    },
     "redux-form": {
       "version": "4.2.0",
       "from": "redux-form@4.2.0",
@@ -4858,6 +4873,11 @@
       "version": "1.1.6",
       "from": "sax@>=1.1.6 <1.2.0",
       "resolved": "https://registry.npmjs.org/sax/-/sax-1.1.6.tgz"
+    },
+    "scroll-behavior": {
+      "version": "0.3.4",
+      "from": "scroll-behavior@latest",
+      "resolved": "https://registry.npmjs.org/scroll-behavior/-/scroll-behavior-0.3.4.tgz"
     },
     "semver": {
       "version": "4.3.6",

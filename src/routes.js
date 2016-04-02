@@ -1,12 +1,12 @@
 import React from 'react'
-import { Route } from 'react-router'
+import { IndexRoute, Route } from 'react-router'
 
 import {
   Application,
   UserDashboard,
   MobilizationDashboard,
   MobilizationSettings
-} from '../../app/scripts/containers'
+} from '../app/scripts/containers'
 
 import {
   Login,
@@ -25,14 +25,14 @@ import {
   RequireLogin,
   CustomDomainWrapper,
   MobilizationCustomDomain
-} from '../../app/scripts/pages'
+} from '../app/scripts/pages'
 
-export default function(store, host) {
+export default (store, host) => {
   const isAppSubdomain = (host === `app.${process.env.APP_DOMAIN}`)
 
   if (isAppSubdomain) {
     return (
-      <Route component={Application}>
+      <IndexRoute component={Application}>
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
         <Route component={RequireLogin} onEnter={RequireLogin.onEnter(store)}>
@@ -56,7 +56,7 @@ export default function(store, host) {
             </Route>
           </Route>
         </Route>
-      </Route>
+      </IndexRoute>
     )
   }
 
