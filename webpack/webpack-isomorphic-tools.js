@@ -43,7 +43,7 @@ module.exports = {
           return module.name;
         }
       },
-      parser: function(m, options) {
+      parser: function(module, options, log) {
         if (options.development) {
           return WebpackIsomorphicToolsPlugin.css_modules_loader_parser(module, options, log);
         } else {
