@@ -54,4 +54,10 @@ describe('Paths', () => {
       expect(Paths.donationMobilizationWidget(1, 2)).to.equal('/mobilizations/1/widgets/2/donation')
     })
   })
+
+  describe('#exportDonations', () => {
+    it('should return the path', () => {
+      expect(Paths.exportDonations(1, 2)).to.equal('/mobilizations/1/widgets/2/exportDonations')
+    })
+  })
 })

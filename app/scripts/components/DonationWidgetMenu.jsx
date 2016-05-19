@@ -7,6 +7,7 @@ export default class DonationWidgetMenu extends React.Component {
     const { mobilization, widget, location } = this.props
     const donationPath = Paths.donationMobilizationWidget(mobilization.id, widget.id)
     const autofirePath = Paths.autofireMobilizationWidget(mobilization.id, widget.id)
+    const exportPath = Paths.exportDonations(mobilization.id, widget.id)
 
     return (
       <div className='bg-white px3 clearfix'>
@@ -21,6 +22,10 @@ export default class DonationWidgetMenu extends React.Component {
               path={autofirePath}
               text='Mensagem agradecimento'
               isActive={autofirePath === location.pathname} />
+            <TabMenuItem
+              path={exportPath}
+              text='Exportar dados de doações para CSV'
+              isActive={exportPath === location.pathname} />
           </ul>
         </div>
       </div>
