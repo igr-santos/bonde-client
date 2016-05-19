@@ -24,7 +24,7 @@ export default class DonationWidgetMenu extends React.Component {
               isActive={autofirePath === location.pathname} />
             <TabMenuItem
               path={exportPath}
-              text='Exportar dados de doações para CSV'
+              text='Exportar'
               isActive={exportPath === location.pathname} />
           </ul>
         </div>

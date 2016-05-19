@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as WidgetActions from './../actions/WidgetActions'
-import * as Paths from '../Paths'
-import { DonationWidgetMenu, Loading, CloseButton, Label} from './../components'
+import * as WidgetActions from './../../actions/WidgetActions'
+import * as Paths from '../../Paths'
+import { DonationWidgetMenu, Loading, CloseButton, Label} from './../../components'
 import reduxForm from 'redux-form'
 import ColorPicker from 'react-color';
 
