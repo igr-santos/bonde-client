@@ -1,4 +1,4 @@
-import { TRANSACTION_DONE } from '../constants/ActionTypes'
+import { TRANSACTION_DONE, EXPORT_DONATIONS } from '../constants/ActionTypes'
 import $ from 'jquery'
 
 export function finishTransaction (params) {
@@ -18,6 +18,19 @@ export function finishTransaction (params) {
         dispatch({
           type: TRANSACTION_DONE,
           data
+        })
+      }
+    })
+  }
+}
+
+export function exportDonations(params) {
+  return dispatch => {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/widgets/${params.widget_id}/donations.csv`, {
+      success: function(data, textStatus, jqXHR){
+        dispatch({
+          type: EXPORT_DONATIONS,
+          mobilizations: data
         })
       }
     })
