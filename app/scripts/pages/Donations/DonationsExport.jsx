@@ -12,20 +12,16 @@ export default class DonationsExport extends React.Component {
   handleClick(e) {
     e.preventDefault()
     const { dispatch, mobilization } = this.props
-    const widget = this.widget()
     const bindedDonationActions = bindActionCreators(DonationActions, dispatch)
 
-
-    bindedDonationActions.exportDonations({
-      mobilization_id: mobilization.id,
-      widget_id: widget.id
-    })
+    bindedDonationActions.exportDonations({ mobilization_id: mobilization.id })
   }
 
   render() {
     const widgetId = this.widget().id
     const mobilizationId = this.props.mobilization.id
     const path = '/mobilizations/' + mobilizationId + '/widgets/' + widgetId + '/donations.csv'
+
     return (
       <div className="flex flex-auto flex-column bg-silver gray relative">
         <DonationWidgetMenu {...this.props } widget={ this.widget() } />
