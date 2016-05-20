@@ -26,11 +26,11 @@ export function finishTransaction (params) {
 
 export function exportDonations(params) {
   return dispatch => {
-    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/widgets/${params.widget_id}/donations.csv`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/donations.csv`, {
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: EXPORT_DONATIONS,
-          mobilizations: data
+          data
         })
       }
     })
