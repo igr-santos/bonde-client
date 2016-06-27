@@ -184,9 +184,18 @@ export default class FormWidget extends React.Component {
   }
 
   renderShareButtons() {
-    return (
-      <TellAFriend {...this.props} message="Formulário submetido com sucesso!" />
-    )
+    const fields = this.fields()
+    let message = ''
+    fields.map((field) => {
+      if (field.kind === 'greetings') {
+        message = field.placeholder
+      }
+    })
+    if (message === '') {
+      return <TellAFriend {...this.props} message="Formulário submetido com sucesso!" />
+    } else {
+      return <p className="center p2 bg-darken-3">{message}</p>
+    }
   }
 
   renderForm() {

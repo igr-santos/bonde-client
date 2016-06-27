@@ -53,12 +53,47 @@ export default class FormWidgetInput extends React.Component {
     }
   }
 
+  renderFieldKind() {
+    const { field, uid, editable, configurable } = this.props
+
+    if (field.kind === 'dropdown') {
+      return (<select
+        id={'input-' + uid}
+        className="field-light block full-width h3"
+        style={(editable || configurable ? {cursor: 'pointer'} : null)}
+      >
+        <option value="">Selecione...</option>
+        {
+          field.placeholder.split(',').map(function(v) {
+            return <option>{v}</option>
+          })
+        }
+      </select>)
+    } else if (field.kind === 'greetings') {
+      return (
+        editable || configurable
+        ? <p className="block full-width">
+          <strong>Mensagem de sucesso alterada para:</strong>
+          <br/>{field.placeholder}
+          </p>
+        : null
+      )
+    } else {
+      return (<input
+        id={'input-' + uid}
+        className="field-light block full-width h3"
+        style={(editable || configurable ? {cursor: 'pointer'} : null)}
+        placeholder={field.placeholder}
+        type='text'
+      />)
+    }
+  }
+
   renderInput() {
     const {
       field,
       editable,
       configurable,
-      uid,
       mobilization: {
         body_font: bodyFont
       }
@@ -77,27 +112,7 @@ export default class FormWidgetInput extends React.Component {
           {field.label}{field.required === 'true' ? ' *' : null}
         </label>
         { this.renderInstructions() }
-        { field.kind === 'dropdown'
-          ? <select
-              id={'input-' + uid}
-              className="field-light block full-width h3"
-              style={(editable || configurable ? {cursor: 'pointer'} : null)}
-            >
-              <option value="">Selecione...</option>
-              {
-                field.placeholder.split(',').map(function(v) {
-                  return <option>{v}</option>
-                })
-              }
-            </select>
-          : <input
-              id={'input-' + uid}
-              className="field-light block full-width h3"
-              style={(editable || configurable ? {cursor: 'pointer'} : null)}
-              placeholder={field.placeholder}
-              type='text'
-            />
-        }
+        { this.renderFieldKind() }
       </div>
     )
   }
