@@ -81,6 +81,16 @@ class MatchWidget extends Component {
     )
   }
 
+  findMatchItem() {
+    const { widget } = this.props
+    const matchList = widget.match_list.filter((match) => {
+      return match.first_choice === this.state.selectedChoice1 && match.second_choice === this.state.selectedChoiceA
+    })
+    if (matchList && matchList.length > 0) {
+      return matchList[0]
+    }
+  }
+
   renderShareButtons() {
     ////
     // @todo
@@ -88,7 +98,11 @@ class MatchWidget extends Component {
     // - injetar caminho da imagem da combinação de acordo com as opções
     //   selecionadas (selectedChoice1 + selectedChoiceA).
     ////
-    const combinationImageUrl = 'https://s3.amazonaws.com/hub-central-dev/uploads/1467831827_nossascidades.jpg'
+    const matchItem = this.findMatchItem()
+    let combinationImageUrl = 'https://s3.amazonaws.com/hub-central-dev/uploads/1467831827_nossascidades.jpg'
+    if (matchItem) {
+      combinationImageUrl = matchItem.goal_image
+    }
     const { selectedChoice1, selectedChoiceA } = this.state
     return <TellAFriend {...this.props}
       message="Resultado da sua combinação"

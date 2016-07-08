@@ -25,7 +25,11 @@ describe('MatchWidget', () => {
       title_text: 'Foo Bar Widget Title!',
       labelChoices1: 'Foo Bar Choice1 Label!',
       labelChoicesA: 'Foo Bar ChoiceA Label!'
-    } }
+    }, match_list: [{
+      first_choice: 'Framboesa',
+      second_choice: 'Hospital',
+      goal_image: 'test.img'
+    }] }
   }
 
   before(() => {
@@ -132,6 +136,12 @@ describe('MatchWidget', () => {
     it('should render one <TellAFriend> component if choices it is combined', () => {
       component.setState({ combined: true })
       expect(component.find('TellAFriend')).to.have.length(1)
+    })
+
+    it('should render goal_image when match choices', () => {
+      const match = props.widget.match_list[0]
+      component.setState({ combined: true, selectedChoice1: match.first_choice, selectedChoiceA: match.second_choice})
+      expect(component.find('TellAFriend').at(0).props().imageUrl).to.equal(match.goal_image)
     })
   })
 })
