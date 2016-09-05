@@ -70,6 +70,8 @@
     "console": "^0.5.2",
     "css-loader": "^0.16.0",
     "downloadjs": "gabrielrtakeda/download",
+    "draft-js": "^0.8.1",
+    "draft-js-export-html": "^0.4.0",
     "drmonty-chosen": "^1.4.2",
     "enzyme": "^2.3.0",
     "expose-loader": "^0.7.0",
