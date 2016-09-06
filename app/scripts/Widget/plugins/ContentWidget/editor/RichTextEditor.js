@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import classnames from 'classnames'
 
 import { Editor, EditorState, ContentState } from 'draft-js'
 import { RichUtils, getDefaultKeyBinding, KeyBindingUtil } from 'draft-js'
@@ -18,10 +19,20 @@ class RichTextEditor extends Component {
 
     let editorState = EditorState.createEmpty()
     if (this.props.initialValue) {
+      // initialValue is a string with syntax HTML, we need transform in contentState
       const contentState = ContentState.createFromBlockArray(convertFromHTML(this.props.initialValue))
       editorState = EditorState.createWithContent(contentState)
     }
-    this.state = { editorState }
+    this.state = { editorState, editing: false }
+  }
+
+  handleFocus() {
+    this.refs.editor.focus()  // Set focus for Editor
+    this.setState({ editing: true })
+  }
+
+  handleBlur() {
+    this.setState({ editing: false })
   }
 
   handleChange(editorState) {
@@ -29,7 +40,7 @@ class RichTextEditor extends Component {
   }
 
   handleKeyBindingFn(e) {
-    // Simulate `[Ctrl + S]`
+    // Create command to save content `[Ctrl + S]`
     if (e.keyCode === 83 && KeyBindingUtil.hasCommandModifier(e)) {
       return 'save-content'
     }
@@ -37,11 +48,25 @@ class RichTextEditor extends Component {
     return getDefaultKeyBinding(e)
   }
 
+  disableEditor() {
+    this.refs.editor.blur()
+    this.setState({ editing: false })
+  }
+
+  handleSaveContent(evt) {
+    evt && evt.preventDefault()
+
+    const { initialValue, saveContent } = this.props
+    const contentHTML = stateToHTML(this.state.editorState.getCurrentContent())
+    if (contentHTML !== initialValue) {
+      saveContent(contentHTML)
+    }
+    this.disableEditor()
+  }
+
   handleKeyCommand(command) {
-    const { saveContent } = this.props
     if (command === 'save-content') {
-      const contentState = this.state.editorState.getCurrentContent()
-      return saveContent(stateToHTML(contentState))
+      return this.handleSaveContent()
     }
 
     // RichUtils command like Bold and Italic
@@ -54,21 +79,32 @@ class RichTextEditor extends Component {
   }
 
   render() {
+    const editorStyle = { outline: this.state.editing ? '1px solid #000' : null }
+
     return (
-      <div className="rich-text-editor">
-        <Editor
-          editorState={this.state.editorState}
-          onChange={::this.handleChange}
-          handleKeyCommand={::this.handleKeyCommand}
-          keyBindingFn={::this.handleKeyBindingFn}
-        />
+      <div className="rich-text">
+        <div className="rich-text-editor" onClick={::this.handleFocus} style={editorStyle}>
+          <Editor
+            ref="editor"
+            editorState={this.state.editorState}
+            onChange={::this.handleChange}
+            handleKeyCommand={::this.handleKeyCommand}
+            keyBindingFn={::this.handleKeyBindingFn}
+            disabled={!this.state.editing}
+          />
+        </div>
+        <div className={classnames("right mt1", { 'display-none': !this.state.editing })}>
+          <button className="button button-transparent caps bg-darken-4 white rounded" onClick={::this.handleSaveContent}>
+            Salvar
+          </button>
+        </div>
       </div>
     )
   }
 }
 
 RichTextEditor.propTypes = {
-  initialValue: PropTypes.object,
+  initialValue: PropTypes.string,
   saveContent: PropTypes.func.isRequired
 }
 
