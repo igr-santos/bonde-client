@@ -6,6 +6,8 @@ import { RichUtils, getDefaultKeyBinding, KeyBindingUtil } from 'draft-js'
 import { convertFromHTML } from 'draft-js'
 import { stateToHTML } from 'draft-js-export-html'
 
+import RichTextToolbar from './RichTextToolbar'
+
 
 class RichTextEditor extends Component {
 
@@ -64,6 +66,24 @@ class RichTextEditor extends Component {
     this.disableEditor()
   }
 
+  toggleBlockType(blockType) {
+    this.handleChange(
+      RichUtils.toggleBlockType(
+        this.state.editorState,
+        blockType
+      )
+    )
+  }
+
+  toggleInlineStyle(inlineStyle) {
+    this.handleChange(
+      RichUtils.toggleInlineStyle(
+        this.state.editorState,
+        inlineStyle
+      )
+    )
+  }
+
   handleKeyCommand(command) {
     if (command === 'save-content') {
       return this.handleSaveContent()
@@ -78,25 +98,42 @@ class RichTextEditor extends Component {
     return false
   }
 
+  handleFocusOut() {
+    this.disableEditor()
+  }
+
   render() {
     const editorStyle = { outline: this.state.editing ? '1px solid #000' : null }
 
     return (
       <div className="rich-text">
-        <div className="rich-text-editor" onClick={::this.handleFocus} style={editorStyle}>
-          <Editor
-            ref="editor"
+        <div className={classnames('content-widget full-width',  { 'display-none': !this.state.editing })}>
+          <RichTextToolbar
+            className="absolute full-width top-0 left-0 bg-darken-4"
+            buttonClassName="button button-transparent white p2"
             editorState={this.state.editorState}
-            onChange={::this.handleChange}
-            handleKeyCommand={::this.handleKeyCommand}
-            keyBindingFn={::this.handleKeyBindingFn}
-            disabled={!this.state.editing}
+            toggleBlockType={::this.toggleBlockType}
+            toggleInlineStyle={::this.toggleInlineStyle}
+            style={{zIndex: 10000}}
           />
+          <div className="fixed top-0 right-0 bottom-0 left-0" onClick={::this.handleFocusOut} style={{ zIndex: 9998 }} />
         </div>
-        <div className={classnames("right mt1", { 'display-none': !this.state.editing })}>
-          <button className="button button-transparent caps bg-darken-4 white rounded" onClick={::this.handleSaveContent}>
-            Salvar
-          </button>
+        <div className=" relative" style={{ zIndex: 10000 }}>
+          <div className="rich-text-editor" onClick={::this.handleFocus} style={editorStyle}>
+            <Editor
+              ref="editor"
+              editorState={this.state.editorState}
+              onChange={::this.handleChange}
+              handleKeyCommand={::this.handleKeyCommand}
+              keyBindingFn={::this.handleKeyBindingFn}
+              disabled={!this.state.editing}
+            />
+          </div>
+          <div className={classnames("right mt1", { 'display-none': !this.state.editing })}>
+            <button className="button button-transparent caps bg-darken-4 white rounded" onClick={::this.handleSaveContent}>
+              Salvar
+            </button>
+          </div>
         </div>
       </div>
     )
