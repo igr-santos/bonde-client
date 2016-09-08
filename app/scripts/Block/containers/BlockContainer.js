@@ -15,7 +15,7 @@ class BlockContainer extends Component {
   }
 
   render() {
-    const { block, widgets, editable } = this.props
+    const { mobilization, block, widgets, editable } = this.props
     // TODO: Criar o comportamento para block move
     const canMoveUp = false
     const canMoveDown = false
@@ -26,7 +26,7 @@ class BlockContainer extends Component {
         style={(block.bg_image ? {backgroundImage: `url(${block.bg_image})`} : null)}>
         <div className="container">
           {/* Render Widgets */}
-          <BlockWidgets widgets={this.props.widgets} />
+          <BlockWidgets widgets={this.props.widgets} mobilization={mobilization} />
           {/* Block Menu */}
           {editable ?
             <div className='relative'>
@@ -83,6 +83,7 @@ class BlockContainer extends Component {
 }
 
 BlockContainer.propTypes = {
+  mobilization: PropTypes.object.isRequired,
   block: PropTypes.shape({
     id: PropTypes.number.isRequired,
     bg_class: PropTypes.string.isRequired,

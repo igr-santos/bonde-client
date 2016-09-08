@@ -38,7 +38,7 @@ export default class DraftWidget extends React.Component {
     if (kind === 'content') {
       widgetParams = {
         ...widgetParams,
-        settings: {content: 'Clique aqui para editar...'}
+        settings: { content: 'Clique aqui para editar...' }
       }
     }
 

@@ -8,6 +8,9 @@ import BlockContainer from '../../containers/BlockContainer'
 
 describe('<BlockContainer />', () => {
   let props = {
+    mobilization: {
+      header_font: 'Ubuntu Mono'
+    },
     block: {
       id: 1,
       bg_class: 'bg-1'
@@ -22,20 +25,8 @@ describe('<BlockContainer />', () => {
 
   it('should render <Widget /> agree widgets received', () => {
     const widgets = [
-      {
-        id: 1,
-        kind: 'draft',
-        sm_size: '12',
-        md_size: '6',
-        lg_size: '6'
-      },
-      {
-        id: 2,
-        kind: 'content',
-        sm_size: '12',
-        md_size: '6',
-        lg_size: '6'
-      },
+      { id: 1, kind: 'draft', sm_size: '12', md_size: '6', lg_size: '6', settings: {} },
+      { id: 2, kind: 'content', sm_size: '12', md_size: '6', lg_size: '6', settings: {} },
     ]
     blockContainer.setProps({ widgets: widgets })
 

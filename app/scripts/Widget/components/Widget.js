@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import * as WidgetPlugins from '../plugins'
 
 
-const Widget = ({ widget }) => {
+const Widget = ({ widget, ...props }) => {
   const kind = widget.kind ? widget.kind.charAt(0).toUpperCase() + widget.kind.slice(1) : 'Draft'
   const Wrapper = WidgetPlugins[kind]
 
@@ -20,7 +20,7 @@ const Widget = ({ widget }) => {
   return (
     <div className={className}>
       {Wrapper ?
-        <Wrapper widget={widget} /> :
+        <Wrapper widget={widget} {...props} /> :
         <span className="red">Widget {widget.kind} not found</span>
       }
     </div>
@@ -28,6 +28,7 @@ const Widget = ({ widget }) => {
 }
 
 Widget.propTypes = {
+  mobilization: PropTypes.object.isRequired,
   widget: PropTypes.shape({
     id: PropTypes.number.isRequired,
     kind: PropTypes.string.isRequired,

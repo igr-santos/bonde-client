@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react'
 
 import Widget from './../../Widget'
 
-const BlockWidgets = ({ widgets }) => {
+const BlockWidgets = ({ widgets, ...props }) => {
   return (
     <div className="clearfix" style={{padding: '5em 0'}}>
       {/* Render widgets */}
       {widgets && widgets.map(widget => {
-        return <Widget widget={widget} />
+        return <Widget widget={widget} {...props} />
       })}
     </div>
   )
