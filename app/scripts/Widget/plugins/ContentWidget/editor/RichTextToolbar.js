@@ -2,28 +2,25 @@ import React, { PropTypes } from 'react'
 
 import BlockStyleToolbar from './BlockStyleToolbar'
 import InlineStyleToolbar from './InlineStyleToolbar'
+import LinkToolbar from './LinkToolbar/LinkToolbar'
 
 
-const RichTextToolbar = ({ editorState, buttonClassName, ...props }) => {
+const RichTextToolbar = ({ editorState, onChangeEditorState, buttonClassName, ...props }) => {
 
-  const { toggleBlockType, toggleInlineStyle, ...otherProps } = props
-
-  const selection = editorState.getSelection()
-  const blockType = editorState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType()
-  const currentStyle = editorState.getCurrentInlineStyle()
+  const toolbarProps = { editorState, onChangeEditorState, buttonClassName }
 
   return (
-    <div {...otherProps}>
-      <BlockStyleToolbar blockType={blockType} onToggle={toggleBlockType} buttonClassName={buttonClassName} />
-      <InlineStyleToolbar currentStyle={currentStyle} onToggle={toggleInlineStyle} buttonClassName={buttonClassName} />
+    <div {...props}>
+      <LinkToolbar className="flex left" {...toolbarProps} />
+      <BlockStyleToolbar className="flex left" {...toolbarProps} />
+      <InlineStyleToolbar className="flex left" {...toolbarProps} />
     </div>
   )
 }
 
 RichTextToolbar.propTypes = {
   editorState: PropTypes.object.isRequired,
-  toggleBlockType: PropTypes.func.isRequired,
-  toggleInlineStyle: PropTypes.func.isRequired,
+  onChangeEditorState: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string
 }
 

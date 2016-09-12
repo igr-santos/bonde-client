@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { RichUtils } from 'draft-js'
 
 import StyleButton from './StyleButton'
 
@@ -16,15 +17,23 @@ const BLOCK_TYPES = [
   /*{label: 'Code Block', style: 'code-block'},*/
 ]
 
-const BlockStyleToolbar = ({ blockType, onToggle, buttonClassName, ...props }) => {
+const getBlockType = (editorState) => {
+  const selection = editorState.getSelection()
+  return editorState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType()
+}
+
+const BlockStyleToolbar = ({ editorState, onChangeEditorState, buttonClassName, ...props }) => {
+
   return (
     <span {...props}>
       {BLOCK_TYPES.map(type => {
         return (
           <StyleButton
             key={type.label}
-            active={type.style === blockType}
-            onToggle={onToggle}
+            active={type.style === getBlockType(editorState)}
+            onToggle={() => {
+              onChangeEditorState(RichUtils.toggleBlockType(editorState, type.style))
+            }}
             className={buttonClassName}
             {...type}
           />
@@ -35,8 +44,8 @@ const BlockStyleToolbar = ({ blockType, onToggle, buttonClassName, ...props }) =
 }
 
 BlockStyleToolbar.propTypes = {
-  blockType: PropTypes.string,
-  onToggle: PropTypes.func.isRequired,
+  editorState: PropTypes.object.isRequired,
+  onChangeEditorState: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string
 }
 

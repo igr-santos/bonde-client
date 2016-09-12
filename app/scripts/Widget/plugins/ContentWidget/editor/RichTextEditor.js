@@ -7,6 +7,7 @@ import { convertFromHTML } from 'draft-js'
 import { stateToHTML } from 'draft-js-export-html'
 
 import RichTextToolbar from './RichTextToolbar'
+import { decorator } from './LinkToolbar/Link'
 
 
 class RichTextEditor extends Component {
@@ -19,11 +20,11 @@ class RichTextEditor extends Component {
   constructor(props) {
     super(props)
 
-    let editorState = EditorState.createEmpty()
+    let editorState = EditorState.createEmpty(decorator)
     if (this.props.initialValue) {
       // initialValue is a string with syntax HTML, we need transform in contentState
       const contentState = ContentState.createFromBlockArray(convertFromHTML(this.props.initialValue))
-      editorState = EditorState.createWithContent(contentState)
+      editorState = EditorState.createWithContent(contentState, decorator)
     }
     this.state = { editorState, editing: false }
   }
@@ -66,24 +67,6 @@ class RichTextEditor extends Component {
     this.disableEditor()
   }
 
-  toggleBlockType(blockType) {
-    this.handleChange(
-      RichUtils.toggleBlockType(
-        this.state.editorState,
-        blockType
-      )
-    )
-  }
-
-  toggleInlineStyle(inlineStyle) {
-    this.handleChange(
-      RichUtils.toggleInlineStyle(
-        this.state.editorState,
-        inlineStyle
-      )
-    )
-  }
-
   handleKeyCommand(command) {
     if (command === 'save-content') {
       return this.handleSaveContent()
@@ -112,13 +95,12 @@ class RichTextEditor extends Component {
             className="absolute full-width top-0 left-0 bg-darken-4"
             buttonClassName="button button-transparent white p2"
             editorState={this.state.editorState}
-            toggleBlockType={::this.toggleBlockType}
-            toggleInlineStyle={::this.toggleInlineStyle}
+            onChangeEditorState={::this.handleChange}
             style={{zIndex: 10000}}
           />
           <div className="fixed top-0 right-0 bottom-0 left-0" onClick={::this.handleFocusOut} style={{ zIndex: 9998 }} />
         </div>
-        <div className=" relative" style={{ zIndex: 10000 }}>
+        <div className=" relative" style={{ zIndex: 9999 }}>
           <div className="rich-text-editor" onClick={::this.handleFocus} style={editorStyle}>
             <Editor
               ref="editor"

@@ -6,7 +6,7 @@ const StyleButton = ({ onToggle, label, iconClass, style, className, active, ...
 
   const onClick = e => {
     e && e.preventDefault()
-    onToggle(style)
+    onToggle()
   }
 
   // TODO: Change class active to 'active'
