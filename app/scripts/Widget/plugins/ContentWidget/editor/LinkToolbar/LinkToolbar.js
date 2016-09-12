@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import { RichUtils, Entity } from 'draft-js'
+import { getSelectionEntity } from 'draftjs-utils'
 
 import StyleButton from '../StyleButton'
-import { findLinkEntities } from './Link'
 
 
 class LinkToolbar extends Component {
@@ -16,16 +16,14 @@ class LinkToolbar extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { editorState } = nextProps
-
     if (editorState !== this.props.editorState) {
-      const selection = editorState.getSelection()
-      const contentState = editorState.getCurrentContent()
-      const contentBlock = contentState.getBlockForKey(selection.getAnchorKey())
-      const entityKey = contentBlock.getEntityAt(selection.getStartOffset())
-      if (entityKey) {
-        const entityInstance = Entity.get(entityKey)
-        if (entityInstance.type === 'LINK') {
+      const nextEntityKey = getSelectionEntity(editorState)
+      if (nextEntityKey) {
+        const entityInstance = Entity.get(nextEntityKey)
+        if (entityInstance && entityInstance.getType() === 'LINK') {
           this.setState({ showURLInput: true, urlValue: entityInstance.getData().href })
+        } else {
+          this.setState({ showURLInput: false, urlValue: '' })
         }
       } else {
         this.setState({ showURLInput: false, urlValue: '' })
@@ -34,13 +32,18 @@ class LinkToolbar extends Component {
   }
 
   confirmLink(e) {
-    const { onChangeEditorState, editorState } = this.props
+    const { editorState, onChangeEditorState } = this.props
 
-    const entityKey = Entity.create('LINK', 'MUTABLE', { href: this.state.urlValue })
-    const newEditorState = RichUtils.toggleLink(editorState, editorState.getSelection(), entityKey)
+    const entitySelected = getSelectionEntity(editorState)
+    let entity
+    if (entitySelected && Entity.get(entitySelected).getType('LINK')) {
+      entity = Entity.replaceData(entitySelected, { href: this.state.urlValue })
+    } else {
+      entity = Entity.create('LINK', 'MUTABLE', { href: this.state.urlValue })
+    }
+
+    const newEditorState = RichUtils.toggleLink(editorState, editorState.getSelection(), entity)
     onChangeEditorState(newEditorState)
-
-    this.setState({ showURLInput: false, urlValue: '' })
   }
 
   promptForLink() {
