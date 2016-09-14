@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import { Entity, RichUtils } from 'draft-js'
 
-import { setLinkToSelection } from '../../utils'
+import { setLinkToSelection, unsetLinkToSelection } from '../../utils'
 
 import IconButton from './IconButton'
 
@@ -40,6 +40,10 @@ class LinkBar extends Component {
     }
   }
 
+  _resetStateLinkBar() {
+    this.setState({ showDialogLink: false, href: '' })
+  }
+
   _toggleDialogLink() {
     const toggleDialog = !this.state.showDialogLink
     this.setState(
@@ -55,13 +59,17 @@ class LinkBar extends Component {
     const { editorState, onChange } = this.props
 
     const newEditorState = setLinkToSelection(editorState, { href })
-    this.setState({ showDialogLink: false, href: '' })
+    this._resetStateLinkBar()
 
     onChange(newEditorState)
   }
 
   _removeLink() {
-    console.log('TODO:', 'unset link in selection')
+    const { editorState, onChange } = this.props
+    const newEditorState = unsetLinkToSelection(editorState)
+    this._resetStateLinkBar()
+
+    onChange(newEditorState)
   }
 
   _renderDialogLink() {

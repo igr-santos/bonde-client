@@ -15,15 +15,29 @@ export const setLinkToSelection = (editorState, data) => {
     entityKey = Entity.create('LINK', 'MUTABLE', data)
     targetSelection = editorState.getSelection()
   } else {
-    entityKey = entity.entityKey
+    const { blockKey, entityKey, startOffset, endOffset } = entity
     Entity.mergeData(entityKey, data)
-
-    const selectionState = SelectionState.createEmpty(entity.blockKey)
-    targetSelection = selectionState.merge({ anchorOffset: entity.startOffset, focusOffset: entity.endOffset })
+    // Select all the entity to apply remake
+    const selectionState = SelectionState.createEmpty(blockKey)
+    targetSelection = selectionState.merge({ anchorOffset: startOffset, focusOffset: endOffset })
   }
 
   const newContentState = Modifier.applyEntity(currentContent, targetSelection, entityKey)
   return EditorState.push(editorState, newContentState, 'apply-entity')
+}
+
+export const unsetLinkToSelection = (editorState) => {
+  const currentContent = editorState.getCurrentContent()
+  const entity = getEntityAtCursor(editorState)
+  if (entity) {
+    const { blockKey, startOffset, endOffset } = entity
+    const selectionState = SelectionState.createEmpty(blockKey)
+    const targetSelection = selectionState.merge({ anchorOffset: startOffset, focusOffset: endOffset })
+    // TODO: Check if not remove all entities between the selection
+    const newContentState = Modifier.applyEntity(currentContent, targetSelection, null)
+    return EditorState.push(editorState, newContentState, 'apply-entity')
+  }
+  console.warn('Reboo:', 'unset link to selection without link, disable button when unselect link')
 }
 
 const getEntityAtOffset = (block, offset) => {

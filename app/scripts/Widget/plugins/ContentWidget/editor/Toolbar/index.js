@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 import { Entity } from 'draft-js'
-import { getEntityAtCursor } from '../../utils'
+import { getEntityAtCursor } from '../utils'
 
 import { LinkBar } from './components'
 
@@ -23,8 +23,6 @@ class Toolbar extends Component {
     return (
       <div className={className} style={style}>
         <LinkBar {...toolbarProps} entity={entity} />
-        <IconButton iconClass="fa fa-link" className={buttonClassName} onClick={::this._openDialogLink} />
-        <IconButton iconClass="fa fa-unlink" className={buttonClassName} onClick={::this._removeLink} />
       </div>
     )
   }

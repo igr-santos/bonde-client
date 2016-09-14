@@ -5,13 +5,10 @@ import classnames from 'classnames'
 class IconButton extends Component {
 
   render() {
-
     const { iconClass, title, active, onClick, className, ...props } = this.props
 
-    const newClassName = classnames(className, { 'bg-blue': active })
-
     return (
-      <button title={title} onClick={onClick} className={newClassName} {...props}>
+      <button title={title} onClick={onClick} className={classnames(className, active ? 'bg-blue' : null)} {...props}>
         <i className={iconClass}></i>
       </button>
     )
