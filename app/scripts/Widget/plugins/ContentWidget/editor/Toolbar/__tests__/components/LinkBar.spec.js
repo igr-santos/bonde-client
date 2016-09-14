@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import { mount } from 'enzyme'
 
 import { EditorState, ContentState, SelectionState, Entity } from 'draft-js'
-import { setLinkToSelection } from '../../../utils'
+import { setLinkToSelection, unsetLinkToSelection } from '../../../utils'
 
 import { LinkBar } from '../../components'
 
@@ -155,6 +155,15 @@ describe('<LinkBar />', () => {
       linkBar.find('button.doneDialog').simulate('click')
 
       expect(_editorState).to.deep.equal(setLinkToSelection(linkEditorState, { href }))
+    })
+
+    it('should remove link if unset button clicked', () => {
+      const linkEditorState = linkBar.props().editorState
+      let _editorState
+      linkBar.setProps({ onChange: editorState => { _editorState = editorState } })
+      linkBar.find('IconButton').at(1).simulate('click')
+
+      expect(_editorState).to.deep.equal(unsetLinkToSelection(linkEditorState))
     })
   })
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { CompositeDecorator, Entity } from 'draft-js'
+import { Entity } from 'draft-js'
 
 
 const Link = ({ children, entityKey }) => {
@@ -23,12 +23,5 @@ export const findLinkEntities = (contentBlock, callback) => {
     callback
   )
 }
-
-export const decorator = new CompositeDecorator([
-  {
-    strategy: findLinkEntities,
-    component: Link,
-  },
-])
 
 export default Link

@@ -41,7 +41,11 @@ class LinkBar extends Component {
   }
 
   _resetStateLinkBar() {
-    this.setState({ showDialogLink: false, href: '' })
+    const { focusEditor } = this.props
+    this.setState(
+      { showDialogLink: false, href: '' },
+      () => setTimeout(focusEditor(), 0)
+    )
   }
 
   _toggleDialogLink() {

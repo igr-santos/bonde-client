@@ -1,13 +1,26 @@
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
-import { Editor, EditorState, ContentState } from 'draft-js'
+import { Editor, EditorState, ContentState, CompositeDecorator } from 'draft-js'
 import { RichUtils, getDefaultKeyBinding, KeyBindingUtil } from 'draft-js'
 import { convertFromHTML } from 'draft-js'
 import { stateToHTML } from 'draft-js-export-html'
 
-import RichTextToolbar from './RichTextToolbar'
-import { decorator } from './LinkToolbar/Link'
+import Toolbar from './Toolbar'
+
+import Link, { findLinkEntities } from './LinkToolbar/Link'
+import Alignment, { findAlignmentEntities } from './AlignmentToolbar/Alignment'
+
+const decorator = new CompositeDecorator([
+  {
+    strategy: findAlignmentEntities,
+    component: Alignment,
+  },
+  {
+    strategy: findLinkEntities,
+    component: Link,
+  },
+])
 
 
 class RichTextEditor extends Component {
@@ -58,10 +71,14 @@ class RichTextEditor extends Component {
 
   handleSaveContent(evt) {
     evt && evt.preventDefault()
+    console.log('save button')
 
     const { initialValue, saveContent } = this.props
+    console.log('INITIAL:', initialValue)
     const contentHTML = stateToHTML(this.state.editorState.getCurrentContent())
+    console.log('CONTENT:', contentHTML)
     if (contentHTML !== initialValue) {
+      console.log('dirty')
       saveContent(contentHTML)
     }
     this.disableEditor()
@@ -91,12 +108,13 @@ class RichTextEditor extends Component {
     return (
       <div className="rich-text">
         <div className={classnames('content-widget full-width',  { 'display-none': !this.state.editing })}>
-          <RichTextToolbar
+          <Toolbar
             className="absolute full-width top-0 left-0 bg-darken-4"
             buttonClassName="button button-transparent white p2"
             editorState={this.state.editorState}
-            onChangeEditorState={::this.handleChange}
-            style={{zIndex: 10000}}
+            onChange={::this.handleChange}
+            style={{ zIndex: 10000 }}
+            focusEditor={() => this.refs.editor.focus()}
           />
           <div className="fixed top-0 right-0 bottom-0 left-0" onClick={::this.handleFocusOut} style={{ zIndex: 9998 }} />
         </div>

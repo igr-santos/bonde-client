@@ -31,6 +31,7 @@ class Toolbar extends Component {
 Toolbar.propTypes = {
   editorState: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string
 }
 
