@@ -1,4 +1,30 @@
-import { EditorState, ContentBlock, CharacterMetadata } from 'draft-js'
+import { EditorState, SelectionState, ContentBlock, CharacterMetadata, Entity, Modifier } from 'draft-js'
+
+const createEntity = (type, mutability, data) => {
+  return Entity.create(type, mutability, data)
+}
+
+export const setLinkToSelection = (editorState, data) => {
+  const currentContent = editorState.getCurrentContent()
+  const entity = getEntityAtCursor(editorState)
+
+  let entityKey
+  let targetSelection
+
+  if (!entity) {
+    entityKey = Entity.create('LINK', 'MUTABLE', data)
+    targetSelection = editorState.getSelection()
+  } else {
+    entityKey = entity.entityKey
+    Entity.mergeData(entityKey, data)
+
+    const selectionState = SelectionState.createEmpty(entity.blockKey)
+    targetSelection = selectionState.merge({ anchorOffset: entity.startOffset, focusOffset: entity.endOffset })
+  }
+
+  const newContentState = Modifier.applyEntity(currentContent, targetSelection, entityKey)
+  return EditorState.push(editorState, newContentState, 'apply-entity')
+}
 
 const getEntityAtOffset = (block, offset) => {
   let entityKey = block.getEntityAt(offset)
@@ -55,7 +81,7 @@ export const clearEntityForRange = (editorState, blockKey, startOffset, endOffse
   let blockMap = contentState.getBlockMap()
   let block = blockMap.get(blockKey)
   let charList = block.getCharacterList()
-  let newCharList = charList.map((char: CharacterMetadata, i) => {
+  let newCharList = charList.map((char, i) => {
     if (i >= startOffset && i < endOffset) {
       return CharacterMetadata.applyEntity(char, null)
     }

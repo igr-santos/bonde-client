@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
+import { Entity, RichUtils } from 'draft-js'
 
-import { IconButton } from './'
+import { setLinkToSelection } from '../../utils'
+
+import IconButton from './IconButton'
 
 
 class LinkBar extends Component {
@@ -11,16 +14,50 @@ class LinkBar extends Component {
     this.state = { showDialogLink: false, href: '' }
   }
 
-  _openDialogLink() {
+  hasSelection(editorState, entity) {
+    const  selection = editorState.getSelection()
+    return (!selection.isCollapsed() || this.isCursorOnLink(entity))
+  }
+
+  isCursorOnLink(entity) {
+    return (entity != null && entity.type === 'LINK')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { editorState, entity } = nextProps
+    const isCursorOnLink = this.isCursorOnLink(entity)
+
+    if (editorState !== this.props.editorState) {
+      if (entity) {
+        if (isCursorOnLink) {
+          this.setState({ href: entity.data.href })
+        } else {
+          this.setState({ showDialogLink: false, href: '' })
+        }
+      } else {
+        this.setState({ showDialogLink: false, href: '' })
+      }
+    }
+  }
+
+  _toggleDialogLink() {
+    const toggleDialog = !this.state.showDialogLink
     this.setState(
-      { showDialogLink: true },
-      () => setTimeout(() => this.refs.hrefInput.focus(), 0)
+      { showDialogLink: toggleDialog },
+      toggleDialog ? () => setTimeout(() => this.refs.hrefInput.focus(), 0) : null
     )
   }
 
   _confirmDialogLink(e) {
     e && e.preventDefault()
-    console.log('TODO:', 'create entity to set link')
+
+    const { href } = this.state
+    const { editorState, onChange } = this.props
+
+    const newEditorState = setLinkToSelection(editorState, { href })
+    this.setState({ showDialogLink: false, href: '' })
+
+    onChange(newEditorState)
   }
 
   _removeLink() {
@@ -38,7 +75,7 @@ class LinkBar extends Component {
           type="text"
           value={this.state.href}
         />
-        <button className="button" onClick={::this._confirmDialogLink}>OK</button>
+        <button type="button" className="button doneDialog" onClick={::this._confirmDialogLink}>OK</button>
       </div>
     )
   }
@@ -47,27 +84,21 @@ class LinkBar extends Component {
     const { showDialogLink } = this.state
     const { buttonClassName, editorState, entity } = this.props
 
-    let selection = editorState.getSelection()
-    let hasSelection = !selection.isCollapsed()
-
-    const isCursorOnLink = (entity != null && entity.type === 'LINK')
-    const shouldShowLinkButton = hasSelection || isCursorOnLink
-
     return (
       <div className="flex left">
         <IconButton
           iconClass="fa fa-link"
           className={buttonClassName}
-          active={this.state.showLinkInput}
-          onClick={::this._openDialogLink}
-          disabled={!shouldShowLinkButton}
+          active={this.state.showDialogLink || this.isCursorOnLink(entity)}
+          onClick={::this._toggleDialogLink}
+          disabled={!this.hasSelection(editorState, entity)}
         />
         {showDialogLink && this._renderDialogLink()}
         <IconButton
           iconClass="fa fa-unlink"
           className={buttonClassName}
           onClick={::this._removeLink}
-          disabled={!isCursorOnLink}
+          disabled={!this.isCursorOnLink(entity)}
         />
       </div>
     )
@@ -81,10 +112,6 @@ LinkBar.propTypes = {
   entity: PropTypes.object,
 
   buttonClassName: PropTypes.string,
-}
-
-LinkBar.propTypes = {
-  hasSelection: false,
 }
 
 export default LinkBar
