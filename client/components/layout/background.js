@@ -1,9 +1,7 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-
 const Background = ({ children, contentSize, image }) => {
-
   const bgStyle = {
     backgroundImage: image ? `url('${image}')` : undefined,
     overflow: 'auto'
@@ -26,7 +24,7 @@ Background.propTypes = {
 }
 
 Background.defaultProps = {
-  contentSize: 3,
+  contentSize: 3
 }
 
 export default Background
