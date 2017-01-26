@@ -73,7 +73,7 @@ export const createServer = (config) => {
     }, { auth: new AuthClient(req) })
     const routes = createRoutes(store)
     const history = createMemoryHistory(req.originalUrl)
-    const { dispatch } = store
+    const { dispatch, getState } = store
 
     match({ routes, history}, (err, redirectLocation, renderProps) => {
       if (err) {
@@ -94,7 +94,9 @@ export const createServer = (config) => {
         params: renderProps.params,
 
         // Allow lifecycle hooks to dispatch Redux actions:
-        dispatch
+        dispatch,
+        // Allow greater complexity for make hook
+        getState
       }
 
       trigger('fetch', components, locals)
