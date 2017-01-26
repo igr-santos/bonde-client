@@ -13,7 +13,6 @@ Button.propTypes = {
   submitting: PropTypes.bool
 }
 
-
 describe('client/components/forms/form', () => {
 
   it('should render without crashed', () => {
