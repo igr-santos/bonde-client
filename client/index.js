@@ -14,7 +14,7 @@ import { configureStore } from '../common/store'
 const initialState = window.INITIAL_STATE || {}
 // Set up Redux (note: this API requires redux@>=3.1.0):
 const store = configureStore(initialState, { auth: new AuthClient() })
-const { dispatch } = store
+const { dispatch, getState } = store
 
 const container = document.getElementById('root')
 
@@ -56,7 +56,8 @@ const render = () => {
         params: renderProps.params,
 
         // Allow lifecycle hooks to dispatch Redux actions:
-        dispatch
+        dispatch,
+        getState
       }
 
       // Don't fetch data for initial route, server has already done the work:
