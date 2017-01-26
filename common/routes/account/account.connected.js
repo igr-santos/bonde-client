@@ -1,14 +1,9 @@
-import { provideHooks } from 'redial'
 import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, css } from 'aphrodite'
 import Helmet from 'react-helmet'
 import { actions as authActions } from '../../../authenticate/redux'
 import Account from '../../components/account'
-
-const redial = {
-  fetch: ({ dispatch }) => dispatch(authActions.load())
-}
 
 const mapStateToProps = (state) => ({
   account: state.auth
@@ -41,4 +36,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default provideHooks(redial)(connect(mapStateToProps, { logout: authActions.logout })(AccountPage))
+export default connect(mapStateToProps, { logout: authActions.logout })(AccountPage)
