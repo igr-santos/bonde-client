@@ -7,11 +7,13 @@ import {
   ControlLabel,
   FormControl,
   UploadImageField
-} from '~tmp-dashboard/forms'
+} from '~components/forms'
 
 // Current module dependencies
-import iconFacebook from '../../images/facebook.svg'
-import iconTwitter from '../../images/twitter.svg'
+if (process.env.BROSER) {
+  var iconFacebook = require('../../images/facebook.svg')
+  var iconTwitter = require('../../images/twitter.svg')
+}
 import { MobilizationSettingsForm } from '../../components'
 import { mapStateToProps, mapActionCreatorsToProps } from './map-to-props'
 

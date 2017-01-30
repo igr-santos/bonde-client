@@ -4,7 +4,7 @@ import reactMixin from 'react-mixin'
 import { connect } from 'react-redux'
 
 // Global module dependencies
-import * as Paths from '~tmp-mobilizations/plugins/Templates/MobilizationTemplatesPaths'
+import * as paths from '~client/paths'
 
 // Children module dependencies
 import { selectors as BlockSelectors } from '~mobilizations/blocks'
@@ -14,13 +14,13 @@ import { selectors as WidgetSelectors } from '~mobilizations/widgets'
 import * as MobilizationSelectors from '../selectors'
 import { Mobilization } from '../components'
 
-@reactMixin.decorate(Navigation)
+// @revert @reactMixin.decorate(Navigation)
 export class MobilizationPage extends Component {
 
   componentDidMount () {
     const { mobilization, blocksIsLoaded, blocks } = this.props
     if (blocksIsLoaded && blocks.length === 0) {
-      this.transitionTo(Paths.mobilizationTemplatesChoose(mobilization))
+      this.transitionTo(paths.mobilizationTemplatesChoose(mobilization))
     }
   }
 

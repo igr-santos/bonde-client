@@ -7,21 +7,21 @@ import reactMixin from 'react-mixin'
 import { selectors as CommunitySelectors } from '~community'
 
 // Children module dependencies
-import * as templatePaths from '~tmp-mobilizations/plugins/Templates/MobilizationTemplatesPaths'
+import * as paths from '~client/paths'
 
 // Current module dependencies
 import { asyncAdd } from '../action-creators'
 import * as MobilizationSelectors from '../selectors'
 import MobilizationBasicsForm, { fields, validate } from '../components/mobilization-basics-form'
 
-@reactMixin.decorate(Navigation)
+// @revert @reactMixin.decorate(Navigation)
 export class MobilizationAddPage extends Component {
 
   onFinishSubmit () {
     const { mobilization } = this.props
 
     if (mobilization) {
-      this.transitionTo(templatePaths.mobilizationTemplatesChoose(mobilization))
+      this.transitionTo(paths.mobilizationTemplatesChoose(mobilization))
     }
   }
 

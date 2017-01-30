@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 // Global module dependencies
-import { Loading } from '../../../scripts/components'
-import { SettingsPageLayout, SettingsPageContentLayout } from '../../../components/Layout'
+import { Loading } from '~components/await'
+import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
 
 // Children modules dependencies
 import { SettingsMenu as FormSettingsMenu } from '../__plugins__/form/components'
@@ -12,7 +12,7 @@ import { SettingsMenu as DonationSettingsMenu } from '../__plugins__/donation/co
 // Current module dependencies
 import * as WidgetActions from '../action-creators'
 
-class DataExportPage extends Component {
+export class DataExportPage extends Component {
   componentDidMount () {
     const { dataExportMount } = this.props
     dataExportMount()
