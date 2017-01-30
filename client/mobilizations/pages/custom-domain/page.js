@@ -7,9 +7,9 @@ import { GoogleFontsLoader } from '~components/fonts'
 import * as arrayUtil from '~utils/array'
 
 // Current module dependencies
-import { Mobilization } from '../components'
+import { Mobilization } from '~mobilizations/components'
 
-export class CustomDomainPage extends Component {
+export class CustomDomain extends Component {
   componentDidMount () {
     const isTest = process.env.NODE_ENV === undefined || process.env.NODE_ENV === 'test'
     if (!isTest) {
@@ -45,10 +45,10 @@ export class CustomDomainPage extends Component {
   }
 }
 
-CustomDomainPage.propTypes = {
+CustomDomain.propTypes = {
   mobilization: PropTypes.object,
   blocks: PropTypes.array.isRequired,
   widgets: PropTypes.array.isRequired
 }
 
-export default CustomDomainPage
+export default CustomDomain

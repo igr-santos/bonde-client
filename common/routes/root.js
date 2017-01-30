@@ -9,7 +9,7 @@ if (process.env.BROWSER) {
 
 import App from '~common/components/app'
 import DefaultServerConfig from '../../server/config'
-import { injectAsyncReducer } from '~common/store'
+import { route as CustomDomainRoute } from '~mobilizations/pages/custom-domain'
 
 export default function createRoutes (store) {
   const { sourceRequest: { host } } = store.getState()
@@ -29,14 +29,7 @@ export default function createRoutes (store) {
       })
     },
     indexRoute: {
-      getComponents (location, cb) {
-        require.ensure([], (require) => {
-          injectAsyncReducer(store, 'mobilizations', require('../../client/mobilizations/reducers').default)
-          injectAsyncReducer(store, 'blocks', require('../../client/mobilizations/blocks/reducers').default)
-          injectAsyncReducer(store, 'widgets', require('../../client/mobilizations/widgets/reducers').default)
-          cb(null, require('./custom-domain-page/custom-domain-page.connected').default)
-        })
-      }
+      ...CustomDomainRoute(store)
     }
   } : {
     path: '/',

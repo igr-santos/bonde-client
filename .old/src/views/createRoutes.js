@@ -9,7 +9,7 @@ import { createRoutes as accountCreateRoutes, requireLoginWrapper } from '~accou
 import { createRoutes as communityCreateRoutes } from '~community'
 import { createRoutes as mobilizationCreateRoutes } from '~mobilizations'
 
-import { CustomDomainPage } from '~mobilizations/pages'
+import { CustomDomain } from '~mobilizations/pages'
 import matchRoutesExternal from '~mobilizations/widgets/__plugins__/match/routes-external'
 
 export default function (store, host) {
@@ -30,7 +30,7 @@ export default function (store, host) {
 
   return (
     <Route component={Application}>
-      <Route path='/' component={CustomDomainPage} />
+      <Route path='/' component={CustomDomain} />
       {matchRoutesExternal({ prefix: '/widgets/:widget_id' })}
       <Route path='*' component={NotFound} status={404} />
     </Route>

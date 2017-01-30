@@ -14,7 +14,7 @@ import * as WidgetActions from '~mobilizations/widgets/action-creators'
 // Current module dependencies
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
-import { CustomDomainPage } from '~mobilizations/pages'
+import { CustomDomain } from '~mobilizations/pages'
 
 const redial = {
   fetch: ({ dispatch, host }) => {
@@ -41,7 +41,7 @@ const CustomDomainPageConnected = props => {
     <div className={css(styles.root)}>
       <Helmet title='CustomDomainPageConnected' />
       <h2 className={css(styles.title)}>CustomDomainPageConnected</h2>
-      <CustomDomainPage {...props} />
+      <CustomDomain {...props} />
     </div>
   )
 }

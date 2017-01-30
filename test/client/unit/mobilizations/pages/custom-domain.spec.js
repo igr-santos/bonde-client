@@ -6,9 +6,9 @@ import { shallow } from 'enzyme'
 import * as arrayUtil from '~utils/array'
 
 // Current module dependencies
-import { CustomDomainPage } from '~mobilizations/pages/custom-domain-page'
+import CustomDomain from '~mobilizations/pages/custom-domain/page'
 
-describe('client/mobilizations/pages/custom-domain-page', () => {
+describe('client/mobilizations/pages/custom-domain', () => {
   let wrapper
   const props = {
     mobilization: {
@@ -20,7 +20,7 @@ describe('client/mobilizations/pages/custom-domain-page', () => {
   }
 
   beforeEach(() => {
-    wrapper = shallow(<CustomDomainPage {...props} />)
+    wrapper = shallow(<CustomDomain {...props} />)
   })
 
   it('render without crashed', () => {
