@@ -5,6 +5,8 @@
     ["module-resolver", {
       "alias": {
         "~node_modules": "./node_modules",
+        "~common": "./common",
+        "~server": "./server",
         "~client": "./client",
         "~account": "./client/account",
         "~components": "./client/components",

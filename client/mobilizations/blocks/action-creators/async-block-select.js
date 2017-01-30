@@ -2,14 +2,15 @@
 import { createAction } from './create-action'
 import c from '../constants'
 
-const asyncBlockSelect = where => (dispatch, getState, axios) => {
+const asyncBlockSelect = where => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()
 
   const endpoint = '/blocks'
   const config = { headers: credentials, params: where }
 
   dispatch({ type: c.REQUEST_ASYNC_BLOCK_SELECT })
-  return axios.get(endpoint, config)
+  return api
+    .get(endpoint, config)
     .then(response => {
       dispatch(createAction(c.SUCCESS_ASYNC_BLOCK_SELECT, response.data))
       return Promise.resolve()

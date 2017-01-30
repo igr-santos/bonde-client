@@ -4,7 +4,8 @@ const config = {
   port: process.env.PORT || 1337,
   apiUrl: process.env.API_URL || 'http://localhost:3000',
   authPort: process.env.AUTH_PORT || 3005,
-  timeout: 29000,
+  appDomain: process.env.APP_DOMAIN || 'localhost',
+  timeout: 30000,
   mongoUrl: process.env.MONGO_URI || 'mongodb://localhost:27017/universal-js'
 }
 

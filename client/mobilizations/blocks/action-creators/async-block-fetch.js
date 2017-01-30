@@ -2,10 +2,11 @@
 import { createAction } from './create-action'
 import c from '../constants'
 
-const asyncBlockFetch = mobilizationId => (dispatch, getState, axios) => {
+const asyncBlockFetch = mobilizationId => (dispatch, getState, { api }) => {
   const { auth: { credentials: headers } } = getState()
   dispatch({ type: c.REQUEST_ASYNC_BLOCK_FETCH })
-  return axios.get(`/mobilizations/${mobilizationId}/blocks`, { headers })
+  return api
+    .get(`/mobilizations/${mobilizationId}/blocks`, { headers })
     .then(response => {
       dispatch(createAction(c.SUCCESS_ASYNC_BLOCK_FETCH, response.data))
       return Promise.resolve()

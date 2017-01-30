@@ -1,9 +1,9 @@
 import * as t from '../action-types'
 
-export default relationshipId => (dispatch, getState, axios) => {
+export default relationshipId => (dispatch, getState, { api }) => {
   dispatch({ type: t.FETCH })
   if (relationshipId) {
-    return axios
+    return api
       .get(`/communities/${relationshipId}/mobilizations`)
       .then(({ status, data }) => {
         if (status === 200) {

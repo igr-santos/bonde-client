@@ -86,7 +86,6 @@ describe('client/]mobilizations/components/mobilization', () => {
     })
 
     it.skip('should render DocumentMeta with mobilization infos', () => {
-      console.log(wrapper.html())
       const meta = wrapper.find('DocumentMeta')
       const {
         name,

@@ -1,17 +1,17 @@
 export const getCurrent = (state, ownProps) => {
-  const { list: { currentId, data } } = state.mobilization
+  const { list: { currentId, data } } = state.mobilizations
   return data.filter(mob => mob.id === currentId)[0]
 }
 
 export const getTemplate = (state, ownProps) => {
-  const { list: { data }, templates: { list: { templateId } } } = state.mobilization
+  const { list: { data }, templates: { list: { templateId } } } = state.mobilizations
   return data.filter(mob => mob.id === templateId)[0]
 }
 
-export const getList = state => state.mobilization.list.data
+export const getList = state => state.mobilizations.list.data
 
-export const getMenuActiveIndex = state => state.mobilization.list.menuActiveIndex
+export const getMenuActiveIndex = state => state.mobilizations.list.menuActiveIndex
 
-export const isLoading = state => state.mobilization.list.loading
+export const isLoading = state => state.mobilizations.list.loading
 
-export const isLoaded = state => state.mobilization.list.isLoaded
+export const isLoaded = state => state.mobilizations.list.isLoaded

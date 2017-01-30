@@ -1,4 +1,3 @@
-import path from 'path'
 import http from 'http'
 import express from 'express'
 import helmet from 'helmet'
@@ -23,7 +22,6 @@ import DefaultServerConfig from './config'
 import webpackConfig from '../tools/webpack.client.dev'
 import { compileDev, startDev } from '../tools/dx'
 import { configureStore } from '../common/store'
-import reducer from '../common/createReducer'
 import createRoutes from '../common/routes/root'
 import { startServer as authStartServer } from '../authenticate'
 import AuthClient from '../authenticate/client'
@@ -75,7 +73,7 @@ export const createServer = (config) => {
     const history = createMemoryHistory(req.originalUrl)
     const { dispatch, getState } = store
 
-    match({ routes, history}, (err, redirectLocation, renderProps) => {
+    match({ routes, history }, (err, redirectLocation, renderProps) => {
       if (err) {
         console.error(err)
         return res.status(500).send('Internal server error')
@@ -92,6 +90,7 @@ export const createServer = (config) => {
         path: renderProps.location.pathname,
         query: renderProps.location.query,
         params: renderProps.params,
+        host: req.headers.host,
 
         // Allow lifecycle hooks to dispatch Redux actions:
         dispatch,
@@ -165,8 +164,8 @@ export const createServer = (config) => {
                 <div id="root">${data.html}</div>
                 <script>window.renderedClassNames = ${JSON.stringify(data.css.renderedClassNames)};</script>
                 <script>window.INITIAL_STATE = ${JSON.stringify(initialState)};</script>
-                <script src="${ __PROD__ ? assets.vendor.js : '/vendor.js' }"></script>
-                <script async src="${ __PROD__ ? assets.main.js : '/main.js' }" ></script>
+                <script src="${__PROD__ ? assets.vendor.js : '/vendor.js'}"></script>
+                <script async src="${__PROD__ ? assets.main.js : '/main.js'}" ></script>
               </body>
             </html>
           `)
@@ -174,9 +173,7 @@ export const createServer = (config) => {
     })
   })
 
-
   const server = http.createServer(app)
-
 
   // Heroku dynos automatically timeout after 30s. Set our
   // own timeout here to force sockets to close before that.
@@ -200,14 +197,12 @@ export const createServer = (config) => {
   return server
 }
 
-
 export const startServer = (serverConfig) => {
-  const config =  {...DefaultServerConfig, ...serverConfig}
+  const config = { ...DefaultServerConfig, ...serverConfig }
 
   const server = createServer(config)
   server.listen(config.port, (err) => {
     if (config.nodeEnv === 'production' || config.nodeEnv === 'test') {
-
       if (err) console.log(err)
       console.log(`server ${config.id} listening on port ${config.port}`)
     } else {

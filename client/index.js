@@ -54,6 +54,7 @@ const render = () => {
         path: renderProps.location.pathname,
         query: renderProps.location.query,
         params: renderProps.params,
+        host: window.location.host,
 
         // Allow lifecycle hooks to dispatch Redux actions:
         dispatch,

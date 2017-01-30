@@ -1,4 +1,5 @@
-import * as t from './action-types'
+// Current module dependencies
+import * as t from '../action-types'
 
 export const initialState = {
   isLoaded: false,
