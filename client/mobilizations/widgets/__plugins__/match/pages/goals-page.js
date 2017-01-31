@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
 // Global module dependencies
-import { SettingsPageContentLayout } from '../../../../../components/Layout'
+import { SettingsPageContentLayout } from '../../../../../components/layout'
 
 // Current module dependencies
 import { ChoiceCombined, Page } from '../components'

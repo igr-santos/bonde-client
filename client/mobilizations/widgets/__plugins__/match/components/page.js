@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Global module dependencies
-import { SettingsPageLayout } from '../../../../../components/Layout'
+import { SettingsPageLayout } from '../../../../../components/layout'
 
 // Current module dependencies
 import { SettingsMenu } from '../components'
