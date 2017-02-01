@@ -8,6 +8,7 @@ import { reducers as blocks } from '../../app/modules/mobilizations/blocks'
 import { reducers as auth } from '../../app/scripts/Account'
 import { reducers as community } from '../../app/scripts/Community'
 import { reducers as widgets } from '../../app/modules/widgets'
+import blockEdition from '../../app/modules/mobilizations/block-reducers'
 
 export default combineReducers({
   form,
@@ -16,6 +17,7 @@ export default combineReducers({
   auth,
   community,
   widgets,
+  blockEdition,
 
   // Need some refact
   mobilization,
