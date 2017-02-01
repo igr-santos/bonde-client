@@ -15,9 +15,10 @@ export default function createRoutes (store) {
   const { sourceRequest: { host } } = store.getState()
 
   // eslint-disable-next-line
-  const hasSubdomain = host.match(`(.+)\.${DefaultServerConfig.appDomain}`)
+  const isSubdomain = host.match(`(.+)\.${DefaultServerConfig.appDomain}`)
+  const isDomain = host.match(DefaultServerConfig.appDomain)
 
-  const root = hasSubdomain ? {
+  const root = isSubdomain || !isDomain ? {
     path: '/',
     component: App,
     getChildRoutes (location, cb) {
