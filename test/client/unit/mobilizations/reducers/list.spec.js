@@ -3,9 +3,9 @@ import { expect } from 'chai'
 // Current module dependencies
 import * as t from '~mobilizations/action-types'
 import { createAction } from '~mobilizations/action-creators/create-action'
-import reducers, { initialState } from '~mobilizations/reducers'
+import reducers, { initialState } from '~mobilizations/reducers/list'
 
-describe('client/mobilizations/reducers', () => {
+describe('client/mobilizations/reducers/list', () => {
   let payload
   let nextState
 
