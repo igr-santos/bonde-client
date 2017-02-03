@@ -19,7 +19,7 @@ describe('mobrender/components/widget', () => {
     const { sm_size, md_size, lg_size } = props.widget
     const className = `col-${sm_size} sm-col-${sm_size} md-col-${md_size} lg-col-${lg_size}`
     const widget = mount(<Widget {...props} />)
-    expect(widget.find('div').props().className).to.contains(className)
+    expect(widget.find('div').at(0).props().className).to.contains(className)
   })
 
   it('should render component children according kind', () => {
@@ -30,5 +30,10 @@ describe('mobrender/components/widget', () => {
   it('should render component loading while saving widget', () => {
     const widget = mount(<Widget {...props} saving={true} />)
     expect(widget.find('Loading').length).to.equal(1)
+  })
+
+  it('should passed widget and update to children', () => {
+    const widget = mount(<Widget {...props} />)
+    expect(widget.find('Draft').props()).to.deep.equal(props)
   })
 })

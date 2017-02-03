@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { Loading } from '~client/components/await'
+import widgets from '../widgets/config'
 
 const Widget = ({ widget, update, saving }) => {
   // Resize column widget
@@ -9,10 +10,14 @@ const Widget = ({ widget, update, saving }) => {
     `px2 col mb4 md-mb0 col-${sm_size}`,
     `sm-col-${sm_size} md-col-${md_size} lg-col-${lg_size}`
   )
+  
+  const widgetConfig = widgets.filter(w => w.kind === widget.kind)[0]
+  const { component: Component } = widgetConfig
 
   return (
     <div className={className}>
       {saving && <Loading />}
+      <Component widget={widget} update={update} />
     </div>
   )
 }

@@ -14,3 +14,18 @@ props = {
   update: PropTypes.func
 }
 ```
+
+Connected your widget component to application through the
+configuration file in `widgets/config.js`
+
+```
+{
+  component: Content,
+  kind: 'content',
+  icon: 'font',
+  label: 'Texto',
+  settings: {
+    content: 'Clique aqui para editar'
+  }
+}
+```
