@@ -90,4 +90,25 @@ describe('mobrender/reducers/widgets', () => {
       })
     })
   })
+
+  describe('doing overlay', () => {
+    
+    it('mouse over', () => {
+      const id = 1
+      const action = { type: t.WIDGET_MOUSE_OVER, payload: id }
+      const nextState = reducer(initialState, action)
+      expect(nextState).to.deep.equal({...initialState,
+        overId: id
+      })
+    })
+
+    it('mouse out', () => {
+      const overState = {...initialState,
+        overId: 1
+      }
+      const action = { type: t.WIDGET_MOUSE_OUT }
+      const nextState = reducer(overState, action)
+      expect(nextState).to.deep.equal(initialState)
+    })
+  })
 })
