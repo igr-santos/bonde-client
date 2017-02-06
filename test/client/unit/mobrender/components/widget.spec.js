@@ -1,7 +1,7 @@
 import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
-import { Widget } from '~client/mobrender/components'
+import Widget from '~client/mobrender/components/widget'
 
 
 describe('mobrender/components/widget', () => {

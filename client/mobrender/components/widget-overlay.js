@@ -23,9 +23,8 @@ const WidgetOverlay = ({ children, widget, onClick, onMouseOver, onMouseOut, has
 
 WidgetOverlay.propTypes = {
   widget: PropTypes.object,
-  editable: PropTypes.bool,
-  hasMouseOver: PropTypes.bool,
   onClick: PropTypes.func,
+  hasMouseOver: PropTypes.bool,
   onMouseOver: PropTypes.func,
   onMouseOut: PropTypes.func
 }

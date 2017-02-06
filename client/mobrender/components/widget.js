@@ -4,7 +4,7 @@ import { Loading } from '~client/components/await'
 import WidgetOverlay from './widget-overlay'
 import widgets from '../widgets/config'
 
-const Widget = ({ editable, widget, update, saving }) => {
+const Widget = ({ editable, widget, update, saving, ...overProps }) => {
   // Resize column widget
   const { sm_size, md_size, lg_size } = widget
   const className = classnames(
@@ -13,16 +13,21 @@ const Widget = ({ editable, widget, update, saving }) => {
   )
   
   const widgetConfig = widgets.filter(w => w.kind === widget.kind)[0]
-  const { component: Component } = widgetConfig
+  const { component: Component, redirect } = widgetConfig
 
   const widgetComponent = <Component widget={widget} update={update} />
  
-
   return (
     <div className={className}>
       {saving && <Loading />}
       {editable ? (
-        <WidgetOverlay>
+        <WidgetOverlay
+          widget={widget}
+          onClick={() => {
+            console.log('// TODO: redirect to page config')
+          }}
+          {...overProps}
+        >
           {widgetComponent}
         </WidgetOverlay>
       ) : widgetComponent}
@@ -32,9 +37,13 @@ const Widget = ({ editable, widget, update, saving }) => {
 
 Widget.propTypes = {
   widget: PropTypes.object.isRequired,
+  editable: PropTypes.bool,
+  // Injected by redux
   update: PropTypes.func.isRequired,
   saving: PropTypes.bool,
-  editable: PropTypes.bool
+  hasMouseOver: PropTypes.bool,
+  onMouseOver: PropTypes.func,
+  onMouseOut: PropTypes.func
 }
 
 export default Widget
