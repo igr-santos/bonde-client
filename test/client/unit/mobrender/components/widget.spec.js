@@ -36,4 +36,14 @@ describe('mobrender/components/widget', () => {
     const widget = mount(<Widget {...props} />)
     expect(widget.find('Draft').props()).to.deep.equal(props)
   })
+
+  it('should render overlay when editable', () => {
+    const widget = mount(<Widget {...props} editable={true} />)
+    expect(widget.find('WidgetOverlay').length).to.equal(1)
+  })
+
+  it('should not render overlay when editable is false', () => {
+    const widget = mount(<Widget {...props} />)
+    expect(widget.find('WidgetOverlay').length).to.equal(0)
+  })
 })
