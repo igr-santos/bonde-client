@@ -43,3 +43,6 @@ static
 
 # Mac OSX specific files
 .DS_Store
+
+# Vim editor swap files
+*.swp

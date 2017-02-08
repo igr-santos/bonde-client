@@ -1,6 +1,6 @@
 import { expect } from 'chai'
-import * as t from '~client/mobrender/action-types'
-import reducer, { initialState } from '~client/mobrender/reducers/widgets'
+import * as t from '~client/mobrender/redux/action-types'
+import reducer, { initialState } from '~client/mobrender/redux/reducers/widgets'
 
 describe('mobrender/reducers/widgets', () => {
   
