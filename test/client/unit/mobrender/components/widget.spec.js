@@ -1,7 +1,8 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 import Widget from '~client/mobrender/components/widget'
+import WidgetOverlay from '~client/mobrender/components/widget-overlay.connected'
 
 
 describe('mobrender/components/widget', () => {
@@ -38,12 +39,12 @@ describe('mobrender/components/widget', () => {
   })
 
   it('should render overlay when editable', () => {
-    const widget = mount(<Widget {...props} editable={true} />)
-    expect(widget.find('WidgetOverlay').length).to.equal(1)
+    const widget = shallow(<Widget {...props} editable={true} />)
+    expect(widget.find(WidgetOverlay).length).to.equal(1)
   })
 
   it('should not render overlay when editable is false', () => {
-    const widget = mount(<Widget {...props} />)
-    expect(widget.find('WidgetOverlay').length).to.equal(0)
+    const widget = shallow(<Widget {...props} />)
+    expect(widget.find(WidgetOverlay).length).to.equal(0)
   })
 })

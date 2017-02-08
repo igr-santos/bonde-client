@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { Loading } from '~client/components/await'
-import WidgetOverlay from './widget-overlay'
+import WidgetOverlay from './widget-overlay.connected'
 import widgets from '../widgets/config'
 
-const Widget = ({ editable, widget, update, saving, ...overProps }) => {
+const Widget = ({ editable, widget, update, saving }) => {
   // Resize column widget
   const { sm_size, md_size, lg_size } = widget
   const className = classnames(
@@ -26,7 +26,6 @@ const Widget = ({ editable, widget, update, saving, ...overProps }) => {
           onClick={() => {
             console.log('// TODO: redirect to page config')
           }}
-          {...overProps}
         >
           {widgetComponent}
         </WidgetOverlay>
@@ -40,10 +39,7 @@ Widget.propTypes = {
   editable: PropTypes.bool,
   // Injected by redux
   update: PropTypes.func.isRequired,
-  saving: PropTypes.bool,
-  hasMouseOver: PropTypes.bool,
-  onMouseOver: PropTypes.func,
-  onMouseOut: PropTypes.func
+  saving: PropTypes.bool
 }
 
 export default Widget

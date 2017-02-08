@@ -24,6 +24,7 @@ const WidgetOverlay = ({ children, widget, onClick, onMouseOver, onMouseOut, has
 WidgetOverlay.propTypes = {
   widget: PropTypes.object,
   onClick: PropTypes.func,
+  // Injected by react-redux
   hasMouseOver: PropTypes.bool,
   onMouseOver: PropTypes.func,
   onMouseOut: PropTypes.func
