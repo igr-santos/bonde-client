@@ -6,5 +6,6 @@ import selectors from './selectors'
 export default {
   actions,
   reducer,
-  selectors
+  selectors,
+  actionTypes
 }
