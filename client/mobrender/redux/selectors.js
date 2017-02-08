@@ -4,8 +4,12 @@ export default (state, props) => ({
   getMobilization: () => {
     const { list: { currentId, data } } = state.mobilizations
     return data.filter(mob => mob.id === currentId)[0]
-  }
+  },
 
+  widgetHasMouseOver: () => {
+    const { widgets: { overId } } = state.mobilizations
+    return overId === props.widget.id
+  }
 })
 
 export const getTemplate = (state, ownProps) => {
