@@ -10,6 +10,19 @@ export default (state, props) => ({
     const { hover } = state.mobilizations
     if (key in hover) return hover[key] === id
     else return false
+  },
+
+  canMoveUp: () => {
+    const { block } = props
+    const { blocks: { data } } = state.mobilizations
+    return data[0] && data[0].id !== block.id
+  },
+
+  canMoveDown: () => {
+    const { block } = props
+    const { blocks: { data } } = state.mobilizations
+    const index = data.length-1
+    return data[index] && data[index].id !== block.id
   }
 })
 

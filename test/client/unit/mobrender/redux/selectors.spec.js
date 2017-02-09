@@ -47,4 +47,46 @@ describe('~client/mobrender/redux/selectors', () => {
       expect(selectors.hasMouseOver('widget', 999)).to.equal(false)
     })
   })
+
+  describe('move block', () => {
+    const data = [
+      { id: 1, name: 'Lorem' },
+      { id: 2, name: 'Ipsum' },
+      { id: 3, name: 'Dolor' }
+    ]
+    const nextState = state.mergeDeep(fromJS({
+      mobilizations: {
+        blocks: {
+          isLoaded: true,
+          data
+        }
+      }
+    })).toJS()
+
+    describe('#canMoveUp', () => {
+
+      it('should be true if props.block isnt first of data', () => {
+        const selectors = Selectors(nextState, { block: data[1] })
+        expect(selectors.canMoveUp()).to.equal(true)
+      })
+
+      it('should be false if props.block is first of data', () => {
+        const selectors = Selectors(nextState, { block: data[0] })
+        expect(selectors.canMoveUp()).to.equal(false)
+      })
+    })
+    
+    describe('#canMoveDown', () => {
+
+      it('should be true if props.block isnt last of data', () => {
+        const selectors = Selectors(nextState, { block: data[1] })
+        expect(selectors.canMoveDown()).to.equal(true)
+      })
+
+      it('should be false if props.block is last of data', () => {
+        const selectors = Selectors(nextState, { block: data[2] })
+        expect(selectors.canMoveDown()).to.equal(false)
+      })
+    })
+  })
 })
