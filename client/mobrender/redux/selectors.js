@@ -12,6 +12,11 @@ export default (state, props) => ({
     else return false
   },
 
+  getBlocks: () => {
+    const { blocks: { data } } = state.mobilizations
+    return data
+  },
+
   canMoveUp: () => {
     const { block } = props
     const { blocks: { data } } = state.mobilizations

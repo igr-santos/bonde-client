@@ -89,4 +89,21 @@ describe('~client/mobrender/redux/selectors', () => {
       })
     })
   })
+
+  describe('#getBlocks', () => {
+    const data = [{ id: 1, name: 'Lorem' }]
+    const nextState = state.mergeDeep(fromJS({
+      mobilizations: {
+        blocks: {
+          isLoaded: true,
+          data
+        }
+      }
+    })).toJS()
+
+    it('should return blocks loaded', () => {
+      const selectors = Selectors(nextState)
+      expect(selectors.getBlocks()).to.deep.equal(data)
+    })
+  })
 })
