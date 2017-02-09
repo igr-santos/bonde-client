@@ -13,18 +13,21 @@ describe('client/mobrender/redux/action-creators (non-async)', () => {
   beforeEach(() => {
     store = configureStore([ thunk ])() 
   })
-  
-  it('handleMouseOut', () => {
-    const expected = createAction(t.WIDGET_MOUSE_OUT)
-    store.dispatch(MobActions.handleMouseOut())
-    expect(store.getActions().length).to.equal(1)
-    expect(store.getActions()[0]).to.deep.equal(expected)
-  })
 
-  it('handleMouseOver', () => {
-    const expected = createAction(t.WIDGET_MOUSE_OVER, 1)
-    store.dispatch(MobActions.handleMouseOver(1))
-    expect(store.getActions().length).to.equal(1)
-    expect(store.getActions()[0]).to.deep.equal(expected)
+  describe('doing hover', () => {
+  
+    it('handleMouseOut', () => {
+      const expected = createAction(t.MOUSE_OUT, { key: 'block' })
+      store.dispatch(MobActions.handleMouseOut('block'))
+      expect(store.getActions().length).to.equal(1)
+      expect(store.getActions()[0]).to.deep.equal(expected)
+    })
+
+    it('handleMouseOver', () => {
+      const expected = createAction(t.MOUSE_OVER, { key: 'block', id: 1 })
+      store.dispatch(MobActions.handleMouseOver('block', 1))
+      expect(store.getActions().length).to.equal(1)
+      expect(store.getActions()[0]).to.deep.equal(expected)
+    })
   })
 })

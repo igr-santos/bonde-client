@@ -1,4 +1,4 @@
 import { createAction } from './create-action'
 import * as t from '../action-types'
 
-export default widgetId => dispatch => dispatch(createAction(t.WIDGET_MOUSE_OVER, widgetId))
+export default (key, id) => dispatch => dispatch(createAction(t.MOUSE_OVER, { key, id }))
