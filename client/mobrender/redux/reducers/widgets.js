@@ -5,8 +5,7 @@ export const initialState = {
   fetching: false,
   saving: false,
   data: [],
-  error: undefined,
-  overId: undefined
+  error: undefined
 }
 
 export default (state = initialState, action = {}) => {
@@ -42,14 +41,6 @@ export default (state = initialState, action = {}) => {
       return {...state,
         saving: false,
         error: action.payload
-      }
-    case t.WIDGET_MOUSE_OVER:
-      return {...state,
-        overId: action.payload
-      }
-    case t.WIDGET_MOUSE_OUT:
-      return {...state,
-        overId: undefined
       }
     default:
       return state

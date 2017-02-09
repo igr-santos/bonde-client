@@ -30,18 +30,18 @@ describe('mobrender/components/widget-overlay', () => {
     expect(over2.find('h1').length).to.equal(1)
   })
 
-  it('should call onMouseOver passing widget id when mouse over', () => {
+  it('should call onMouseOver passing ("widget", widget.id) when mouse over', () => {
     let result
-    over.setProps({ onMouseOver: id => result = id })
+    over.setProps({ onMouseOver: (key, id) => result = [key, id] })
     over.find('div.relative').simulate('mouseover')
-    expect(result).to.equal(props.widget.id)
+    expect(result).to.deep.equal(['widget', props.widget.id])
   })
 
-  it('should call onMouseOut when mouse out', () => {
+  it('should call onMouseOut passing ("widget") when mouse out', () => {
     let result
-    over.setProps({ onMouseOut: () => result = true })
+    over.setProps({ onMouseOut: key => result = [key, ] })
     over.find('div.relative').simulate('mouseout')
-    expect(result).to.equal(true)
+    expect(result).to.deep.equal(['widget'])
   })
 
   it('should render cursor pointer', () => {

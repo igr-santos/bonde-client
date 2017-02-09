@@ -6,9 +6,10 @@ export default (state, props) => ({
     return data.filter(mob => mob.id === currentId)[0]
   },
 
-  widgetHasMouseOver: () => {
-    const { widgets: { overId } } = state.mobilizations
-    return overId === props.widget.id
+  hasMouseOver: (key, id) => {
+    const { hover } = state.mobilizations
+    if (key in hover) return hover[key] === id
+    else return false
   }
 })
 

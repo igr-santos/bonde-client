@@ -27,24 +27,24 @@ describe('~client/mobrender/redux/selectors', () => {
     })
   })
 
-  describe('#widgetHasMouseOver', () => {
+  describe('#hasMouseOver', () => {
     const widget = { id: 1, kind: 'draft' }
     const nextState = state.mergeDeep(fromJS({
       mobilizations: {
-        widgets: {
-          overId: widget.id
+        hover: {
+          'widget': widget.id
        }
       }
     })).toJS()
 
-    it('should be true if props.widget equals mouseOver', () => {
-      const selectors = Selectors(nextState, { widget })
-      expect(selectors.widgetHasMouseOver()).to.equal(true)
+    it('should be true if (key, id) equals mouseOver in state', () => {
+      const selectors = Selectors(nextState)
+      expect(selectors.hasMouseOver('widget', widget.id)).to.equal(true)
     })
 
-    it('should be false if props.widget not equals mouseOver', () => {
-      const selectors = Selectors(nextState, { widget: { id: 2, kind: 'content' } })
-      expect(selectors.widgetHasMouseOver()).to.equal(false)
+    it('should be false if (key, id) not equals mouseOver or not exists in state', () => {
+      const selectors = Selectors(nextState)
+      expect(selectors.hasMouseOver('widget', 999)).to.equal(false)
     })
   })
 })
