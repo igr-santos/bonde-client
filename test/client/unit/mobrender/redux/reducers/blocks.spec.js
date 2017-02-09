@@ -1,13 +1,13 @@
 import { expect } from 'chai'
 import * as t from '~client/mobrender/redux/action-types'
-import reducer, { initialState } from '~client/mobrender/redux/reducers/widgets'
+import reducer, { initialState } from '~client/mobrender/redux/reducers/blocks'
 
-describe('~client/mobrender/redux/reducers/widgets', () => {
+describe('~client/mobrender/redux/reducers/blocks', () => {
   
   describe('doing fetch', () => {
     
     it('request', () => {
-      const action = { type: t.FETCH_WIDGETS_REQUEST }
+      const action = { type: t.FETCH_BLOCKS_REQUEST }
       const nextState = reducer(initialState, action)
       expect(nextState).to.deep.equal({
         ...initialState,
@@ -20,10 +20,10 @@ describe('~client/mobrender/redux/reducers/widgets', () => {
         fetching: true
       }
       const data = [
-        { id: 1, kind: 'draft' },
-        { id: 2, kind: 'draft' }
+        { id: 1 },
+        { id: 2 }
       ]
-      const action = { type: t.FETCH_WIDGETS_SUCCESS, payload: data }
+      const action = { type: t.FETCH_BLOCKS_SUCCESS, payload: data }
       const nextState = reducer(requestState, action)
       expect(nextState).to.deep.equal({...requestState,
         isLoaded: true,
@@ -37,7 +37,7 @@ describe('~client/mobrender/redux/reducers/widgets', () => {
         fetching: true
       }
       const error = '500 Internal Server Error'
-      const action = { type: t.FETCH_WIDGETS_FAILURE, payload: error }
+      const action = { type: t.FETCH_BLOCKS_FAILURE, payload: error }
       const nextState = reducer(requestState, action)
       expect(nextState).to.deep.equal({...requestState,
         isLoaded: true,
@@ -52,8 +52,8 @@ describe('~client/mobrender/redux/reducers/widgets', () => {
     const fetchState = {...initialState,
       isLoaded: true,
       data: [
-        { id: 1, kind: 'draft' },
-        { id: 2, kind: 'draft' }
+        { id: 1, name: 'Lorem' },
+        { id: 2, name: 'Ipsum' }
       ]
     }
 
@@ -62,27 +62,27 @@ describe('~client/mobrender/redux/reducers/widgets', () => {
     }
     
     it('request', () => {
-      const action = { type: t.UPDATE_WIDGET_REQUEST }
+      const action = { type: t.UPDATE_BLOCK_REQUEST }
       const nextState = reducer(fetchState, action)
       expect(nextState).to.deep.equal(fetchRequestState)
     })
 
     it('success', () => {
-      const widget = { id: 1, kind: 'content' }
-      const action = { type: t.UPDATE_WIDGET_SUCCESS, payload: widget }
+      const block = { id: 1, name: 'Dolor' }
+      const action = { type: t.UPDATE_BLOCK_SUCCESS, payload: block }
       const nextState = reducer(fetchRequestState, action)
       expect(nextState).to.deep.equal({...fetchRequestState,
         saving: false,
-        data: fetchRequestState.data.map(w => {
-          if (w.id === widget.id) return widget
-          else return w
+        data: fetchRequestState.data.map(b => {
+          if (b.id === block.id) return block
+          else return b
         })
       })
     })
 
     it('failure', () => {
       const error = '500 Internal Server Error'
-      const action = { type: t.UPDATE_WIDGET_FAILURE, payload: error }
+      const action = { type: t.UPDATE_BLOCK_FAILURE, payload: error }
       const nextState = reducer(fetchRequestState, action)
       expect(nextState).to.deep.equal({...fetchRequestState,
         saving: false,
