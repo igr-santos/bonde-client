@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { asyncUpdateWidget as update } from '../action-creators'
+import { asyncUpdateWidget as update } from '../redux/action-creators'
 import Widget from './widget'
 
 const mapStateToProps = (state, props) => ({
