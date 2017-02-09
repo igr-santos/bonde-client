@@ -90,4 +90,24 @@ describe('~client/mobrender/redux/reducers/blocks', () => {
       })
     })
   })
+
+  describe('doing move', () => {
+    const data = [
+      { id: 1, name: 'Lorem' },
+      { id: 2, name: 'Ipsum' },
+      { id: 3, name: 'Dolor' }
+    ]
+    const fetchState = {...initialState,
+      isLoaded: true,
+      data
+    }
+
+    it('block up', () => {
+      const action = { type: t.MOVE_BLOCK_UP, payload: data[1] }
+      const nextState = reducer(fetchState, action)
+      expect(nextState).to.deep.equal({...nextState,
+        data: [data[1], data[0], data[2]]
+      })
+    })
+  })
 })
