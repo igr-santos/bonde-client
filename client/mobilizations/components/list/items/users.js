@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
 const Users = ({ users_count: usersCount }) => (
-  <div className='item-users px3 col col-2'>
+  <div className='item users px3 col col-2'>
     {usersCount || '-'}
   </div>
 )

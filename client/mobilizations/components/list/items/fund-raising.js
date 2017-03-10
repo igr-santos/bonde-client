@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
 const FundRaising = ({ total_fund_raising: totalFundRaising }) => (
-  <div className='item-fund-raising px3 col col-2'>
+  <div className='item fund-raising px3 col col-2'>
     R$ {totalFundRaising || '-'}
   </div>
 )
