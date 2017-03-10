@@ -5,7 +5,7 @@ import classnames from 'classnames'
 if (process.env.BROWSER) require('./menu.scss')
 
 const Menu = ({ active, children }) => (
-  <div className={classnames('menu', { 'hide': !active })}>
+  <div className={classnames('more-menu', { 'show': active })}>
     {children}
   </div>
 )
