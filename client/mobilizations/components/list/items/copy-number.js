@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
 const CopyNumber = ({ uses_number: usesNumber }) => (
-  <div className='item users px3 col col-2'>
+  <div className='users px3 col col-2'>
     {usesNumber || '-'}
   </div>
 )
