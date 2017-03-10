@@ -1,8 +1,8 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 
-import * as MobilizationActions from '~mobilizations/action-creators'
-import * as MobilizationSelectors from '~mobilizations/selectors'
+import MobSelectors from '~client/mobrender/redux/selectors'
+import { toggleMobilizationMenu } from '~client/mobrender/redux/action-creators'
 import * as TemplateActions from '~mobilizations/templates/action-creators'
 import * as TemplateSelectors from '~mobilizations/templates/selectors'
 
@@ -16,20 +16,20 @@ const redial = {
     !TemplateSelectors.isLoaded(state) && promises.push(
       dispatch(TemplateActions.asyncFetch())
     )
-    promises.push(dispatch(MobilizationActions.toggleMenu(undefined)))
+    promises.push(dispatch(toggleMobilizationMenu(undefined)))
     return Promise.all(promises)
   }
 }
 
 const mapStateToProps = state => ({
   loading: TemplateSelectors.isLoading(state),
-  menuActiveIndex: MobilizationSelectors.getMenuActiveIndex(state),
+  menuActiveIndex: MobSelectors(state).getMobilizationMenuActive(),
   mobilizationTemplates: TemplateSelectors.getCustomTemplates(state)
 })
 
 const mapActionCreatorsToProps = {
   asyncDestroyTemplate: TemplateActions.asyncDestroyTemplate,
-  toggleMenu: MobilizationActions.toggleMenu
+  toggleMenu: toggleMobilizationMenu
 }
 
 export default provideHooks(redial)(
