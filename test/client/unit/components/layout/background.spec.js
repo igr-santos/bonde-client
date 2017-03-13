@@ -11,7 +11,7 @@ describe('client/components/layout/background', () => {
   })
 
   it('should render div with bg classes', () => {
-    const className = 'bg-center bg-cover absolute top-0 right-0 bottom-0 left-0'
+    const className = 'bg-center bg-reboo bg-cover absolute top-0 right-0 bottom-0 left-0'
     const bg = mount(<Background />)
     const main = bg.find('div').at(0)
     expect(main.props().className).to.equal(className)
