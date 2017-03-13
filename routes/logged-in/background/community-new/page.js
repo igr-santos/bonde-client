@@ -45,7 +45,7 @@ class CommunityNewPage extends Component {
             <ControlLabel>Cidade da comunidade</ControlLabel>
             <FormControl type='text' placeholder='Exemplo: São Paulo' />
           </FormGroup>
-          <Button type='submit' className='col-12 rounded-bottom'>
+          <Button type='submit' className='btn py2 caps white col-12 rounded-bottom bg-pagenta'>
             {formProps.submitting ? 'Salvando...' : 'Criar comunidade'}
           </Button>
           <FormError className='mt2' />
