@@ -12,7 +12,7 @@ export default mobilizationId => (dispatch, getState, { api }) => {
       return Promise.resolve()
     })
     .catch(ex => {
-      dispatch(createAction(c.FETCH_BLOCKS_FAILURE, ex))
+      dispatch(createAction(t.FETCH_BLOCKS_FAILURE, ex))
       return Promise.reject(ex)
     })
 }
