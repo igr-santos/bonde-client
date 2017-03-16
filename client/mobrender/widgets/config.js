@@ -5,7 +5,7 @@ import {
   Content,
   Donation
 } from '~client/mobilizations/widgets/__plugins__'
-import { createEditorContent } from '~client/components/editor-draft-js'
+import { createEditorContent } from '~client/mobilizations/widgets/__plugins__/content/components/editor-slate'
 import * as Paths from '~client/paths'
 
 export default (mobilization, widget) => [
