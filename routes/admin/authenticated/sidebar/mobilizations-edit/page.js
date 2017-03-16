@@ -11,6 +11,12 @@ import Mobilization from '~client/mobrender/components/mobilization.connected'
 
 export class MobilizationsEditPage extends Component {
 
+  componentWillReceiveProps (nextProps) {
+    const { mobilization, blocksIsLoaded, blocks } = nextProps
+    if (blocksIsLoaded && blocks.length === 0)
+      browserHistory.push(paths.createBlock(mobilization))
+  }
+
   render () {
     const { mobilization, renderIsLoading } = this.props
 
@@ -33,7 +39,9 @@ MobilizationsEditPage.propTypes = {
     header_font: PropTypes.string,
     body_font: PropTypes.string
   }).isRequired,
-  renderIsLoading: PropTypes.bool
+  renderIsLoading: PropTypes.bool,
+  blocks: PropTypes.array,
+  blockIsLoaded: PropTypes.bool
 }
 
 export default MobilizationsEditPage

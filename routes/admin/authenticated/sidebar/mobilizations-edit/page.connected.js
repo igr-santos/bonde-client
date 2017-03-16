@@ -27,6 +27,8 @@ const mapStateToProps = (state, props) => {
   const selectors = MobSelectors(state, props)
   return {
     mobilization: selectors.getMobilization(),
+    blocks: selectors.getBlocks(),
+    blocksIsLoaded: selectors.blocksIsLoaded(),
     renderIsLoading: selectors.renderIsLoading()
   }
 }
