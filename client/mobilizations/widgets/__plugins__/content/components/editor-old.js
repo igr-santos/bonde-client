@@ -4,8 +4,8 @@ import classnames from 'classnames'
 import { wysihtml5, wysihtml5ParserRules } from './wysihtml-advanced'
 
 // Global module dependencies
-import { WYSIHTMLToolbar } from '~components/editor-wysihtml'
-import { Loading } from '~components/await'
+import { WYSIHTMLToolbar } from '~client/components/editor-wysihtml'
+import { Loading } from '~client/components/await'
 
 class EditorOld extends React.Component {
   constructor (props, context) {

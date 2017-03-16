@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ColorSchemer } from '~components/editor-wysihtml'
+import { ColorSchemer } from '~client/components/editor-wysihtml'
 
 class WYSIHTMLToolbarColorPicker extends React.Component {
   constructor () {

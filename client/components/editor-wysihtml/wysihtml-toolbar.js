@@ -1,17 +1,12 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-import {
-  WYSIHTMLToolbarInsertImage,
-  WYSIHTMLToolbarInsertHTML,
-  WYSIHTMLToolbarCreateLink,
-  WYSIHTMLToolbarColorPicker
-} from '~components/editor-wysihtml'
+import WYSIHTMLToolbarInsertImage from './wysihtml-toolbar-insert-image'
+import WYSIHTMLToolbarInsertHTML from './wysihtml-toolbar-insert-html'
+import WYSIHTMLToolbarCreateLink from './wysihtml-toolbar-create-link'
+import WYSIHTMLToolbarColorPicker from './wysihtml-toolbar-color-picker'
 
-import {
-  DropdownMenu,
-  DropdownMenuItem
-} from '~components/dropdown-menu'
+import { DropdownMenu, DropdownMenuItem } from '~client/components/dropdown-menu'
 
 const renderFontsizeDropdownMenuItem = (size, className) => (
   <DropdownMenuItem>
